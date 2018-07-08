@@ -8,6 +8,7 @@ import path from 'path';
 // import favicon from 'serve-favicon';
 
 import index from './routes/index';
+import posts from './routes/post';
 
 const app = express();
 const debug = Debug('backend:app');
@@ -31,7 +32,8 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/api', index);
+app.use('/posts', posts)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
