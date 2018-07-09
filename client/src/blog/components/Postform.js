@@ -24,7 +24,7 @@ class Postform extends Component {
     e.preventDefault();
 
     const post = {
-      id: Math.random(),      
+      postID: Math.random(),      
       title: this.state.title,
       body: this.state.body
     }
