@@ -1,0 +1,21 @@
+
+header{
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    /* text-align: center; */
+    margin-bottom: 30px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  header .btn{
+      border: none;
+      border-radius: 7px;
+      background: #000000;
+      padding: 15px 25px;
+      color: white;
+      text-transform: uppercase;
+      max-width: 150px;
+      cursor: pointer;
+  }
