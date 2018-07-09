@@ -4,7 +4,7 @@ import {
 } from './types';
 
 export const fetchPosts = () => dispatch => {
-    fetch('/api')
+    fetch('/posts')
         .then(res => res.json())
         .then(posts => dispatch({
             type: FETCH_POSTS,

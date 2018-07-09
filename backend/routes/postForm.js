@@ -4,9 +4,9 @@ import articlesJson from '../models/articlesJson';
 const router = express.Router();
 
 router.post('/', (req, res) => {
-    articlesJson.push(req.body);
-
-    res.json(articlesJson[articlesJson.length - 1])
+    articlesJson.unshift(req.body);
+    
+    res.json(articlesJson[0])
 });
 
 export default router;

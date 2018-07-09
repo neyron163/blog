@@ -10,6 +10,7 @@ import path from 'path';
 import index from './routes/index';
 import posts from './routes/post';
 import postForm from './routes/postForm';
+import singelPost from './routes/singelPost';
 
 
 const app = express();
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', index);
 app.use('/posts', posts);
 app.use('/postsForm', postForm);
+app.use('/', singelPost);
 
 
 // catch 404 and forward to error handler
