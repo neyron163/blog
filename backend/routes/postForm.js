@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
     articlesJson.push(req.body);
+
     res.json(articlesJson[articlesJson.length - 1])
 });
 
