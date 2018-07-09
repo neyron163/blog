@@ -9,6 +9,8 @@ import path from 'path';
 
 import index from './routes/index';
 import posts from './routes/post';
+import postForm from './routes/postForm';
+
 
 const app = express();
 const debug = Debug('backend:app');
@@ -33,7 +35,9 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', index);
-app.use('/posts', posts)
+app.use('/posts', posts);
+app.use('/postsForm', postForm);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

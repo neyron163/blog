@@ -3,8 +3,9 @@ import articlesJson from '../models/articlesJson';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json(articlesJson);
+router.post('/', (req, res) => {
+    articlesJson.push(req.body);
+    res.json(articlesJson[articlesJson.length - 1])
 });
 
 export default router;

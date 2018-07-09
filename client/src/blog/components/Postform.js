@@ -22,7 +22,7 @@ class Postform extends Component {
       body: this.state.body
     }
 
-    fetch('/posts', {
+    fetch('/postsForm', {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(post)
