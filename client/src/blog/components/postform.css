@@ -1,0 +1,6 @@
+.form-input input{
+    outline: 1px solid red;
+}
+.form-input textarea{
+    outline: 1px solid red; 
+}
