@@ -10,4 +10,5 @@ const Article = new Schema({
     body: String
 });
 
+
 export default mongoose.model('ArticleModel', Article);

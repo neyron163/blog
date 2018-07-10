@@ -9,6 +9,8 @@ const Article = ArticleModel({
     body: 'Est swine jowl irure non.  Kielbasa anim pancetta qui officia jerky tri-tip est.  Landjaeger exercitation cillum et occaecat quis qui laborum prosciutto pork.  Dolore capicola laboris jerky, in sed drumstick pork loin beef ribs id porchetta sausage.'
 });
 
+// Article.save()
+
 /* GET index page. */
 router.get('/', (req, res) => {
   res.json([Article])

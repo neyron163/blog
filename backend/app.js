@@ -10,8 +10,23 @@ import path from 'path';
 import index from './routes/index';
 import posts from './routes/post';
 import postForm from './routes/postForm';
-import singelPost from './routes/singelPost';
+import postDel from './routes/postDel';
+// import singelPost from './routes/singelPost';
+import mongoose from 'mongoose';
 
+const mongoDB = 'mongodb://127.0.0.1:27017/blog';
+mongoose.connect(mongoDB,  { useNewUrlParser: true });
+const db = mongoose.connection;
+
+// Check connection
+db.once('open', () => {
+    console.log('Connected to MongoDB');
+});
+
+// Check for DB errors
+db.on('error', (err) => {
+    console.log(err);
+});
 
 const app = express();
 const debug = Debug('backend:app');
@@ -38,7 +53,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', index);
 app.use('/posts', posts);
 app.use('/postsForm', postForm);
-app.use('/', singelPost);
+app.use('/postsDel', postDel);
+// app.use('/', singelPost);
 
 
 // catch 404 and forward to error handler

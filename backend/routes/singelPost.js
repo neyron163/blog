@@ -1,17 +1,19 @@
-import express from 'express';
-import articlesJson from '../models/articlesJson';
+// import express from 'express';
+// import articlesJson from '../models/articlesJson';
 
-const router = express.Router();
+// const router = express.Router();
 
-let numberSingelArticle;
+// let numberSingelArticle;
 
-const nameID = articlesJson.map((el, i) => {
-    numberSingelArticle = i;
-    return el.title.split(' ').join('-');
-});
+// const nameID = articlesJson.map((el, i) => {
 
-router.get(`/:${nameID}`, (req, res) => {
-    res.json(articlesJson[numberSingelArticle]);
-});
+//     numberSingelArticle = i;
+//     return el.title.split(' ').join('-');
 
-export default router;
+// });
+
+// router.get(`/:${nameID}`, (req, res) => {
+//     res.json(articlesJson[numberSingelArticle]);
+// });
+
+// export default router;
