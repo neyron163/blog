@@ -43,49 +43,34 @@ class Postform extends Component {
     this.setState({ classActive: false });
 
   }
-
+  activeClass(){
+      if(this.state.classActive){
+          return 'form-input';
+      }else{
+          return '';
+      }
+  }
   render() {
-    if (!this.state.classActive) {
       return (
         <div>
           <h1>Add Post</h1>
           <form onSubmit={this.onSubmit}>
-            <div>
+
+            <div className={this.activeClass()}>
               <label>Title: </label><br />
               <input type="text" name="title" onChange={this.onChange} value={this.state.title} />
             </div>
-            <div>
+
+            <div className={this.activeClass()}>
               <label>Body: </label><br />
               <textarea name="body" value={this.state.body} onChange={this.onChange} />
             </div>
+            
             <br />
             <button type='sumbmit'>Sumbmit</button>
           </form>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <h1>Add Post</h1>
-          <form onSubmit={this.onSubmit}>
-            <div>
-              <label>Title: </label><br />
-              <div className="form-input">
-                <input type="text" name="title" onChange={this.onChange} value={this.state.title} />
-              </div>
-            </div>
-            <div>
-              <label>Body: </label><br />
-              <div className="form-input">
-                <textarea name="body" value={this.state.body} onChange={this.onChange} />
-              </div>
-            </div>
-            <br />
-            <button type='sumbmit'>Sumbmit</button>
-          </form>
-        </div>
-      );
-    }
   }
 }
 
