@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/postActions';
+import { fetchPosts, deletePost } from '../actions/postActions';
 import './posts.css';
 
 class Posts extends Component {
@@ -17,7 +17,8 @@ class Posts extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchPosts()
+        this.props.fetchPosts();
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -27,16 +28,16 @@ class Posts extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-
-        fetch('/postsDel', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ID: this.state.ID})
-        })
-        .then(res => res.json())
-        .then(resJson => console.log(resJson))
+        this.props.deletePost(this.state.ID);
+        // fetch('/postsDel', {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({ID: this.state.ID})
+        // })
+        // .then(res => res.json())
+        // .then(resJson => console.log(resJson))
         // .then(post => dispatch({
         //     type: NEW_POST,
         //     payload: post
@@ -51,12 +52,13 @@ class Posts extends Component {
   render() {
       const postItems = this.props.posts.map(post => {
           return (
-            <div className="flex-article" key={post.postID}>
+            <div className="flex-article" key={post._id}>
                 <div className="left-side">
                     <h3>{post.title}</h3>
                     <p>{post.body}</p>
                 </div>
                 <form onSubmit={this.onSubmit} id={post._id}>
+                <span>{post._id}</span>
                     <div className="right-side">
                         <button className="delete" onClick={this.onClick} type='sumbmit'>del</button>
                     </div>
@@ -75,7 +77,8 @@ class Posts extends Component {
 Posts.propTypes = {
     fetchPosts: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
-    newPost: PropTypes.object
+    newPost: PropTypes.object,
+    deletePost: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -83,4 +86,4 @@ const mapStateToProps = state => ({
     newPost: state.posts.item
 });
 
-export default connect(mapStateToProps, { fetchPosts })(Posts);
+export default connect(mapStateToProps, { fetchPosts, deletePost })(Posts);

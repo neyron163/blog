@@ -34,12 +34,12 @@ class Postform extends Component {
     e.preventDefault();
 
     const post = {
-      postID: Math.random(),
       title: this.state.title,
       body: this.state.body
     }
 
     this.props.createPost(post);
+    console.log(post)
     this.setState({ classActive: false });
 
   }

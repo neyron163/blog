@@ -1,6 +1,7 @@
 import {
     FETCH_POSTS,
-    NEW_POST
+    NEW_POST,
+    DEL_POST
 } from './types';
 
 export const fetchPosts = () => dispatch => {
@@ -23,6 +24,22 @@ export const createPost = (postData) => dispatch => {
         .then(res => res.json())
         .then(post => dispatch({
             type: NEW_POST,
+            payload: post
+        }));
+};
+
+export const deletePost = (postID) => dispatch => {
+    fetch('/postsDel', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ ID: postID})
+        })
+        .then(res => res.json())
+        // .then(resJson => console.log(resJson))
+        .then(post => dispatch({
+            type: DEL_POST,
             payload: post
         }));
 };

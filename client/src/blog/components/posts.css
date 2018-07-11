@@ -9,6 +9,9 @@
 .flex-article .left-side{
     margin-right: 20px;
 }
+.flex-article form span{
+    display: none;
+}
 .flex-article .right-side .delete{
     background: none;
     border: 2px solid black;

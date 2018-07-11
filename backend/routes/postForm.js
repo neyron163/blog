@@ -4,14 +4,15 @@ import ArticleModel from '../models/articles';
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-
-    articlesJson.unshift(req.body);
-    res.json(articlesJson[0]);
-
+router.post('/', (req, res, next) => {
     const Article = new ArticleModel(req.body)
     Article.save()
-    // console.log(req.body)
+    setTimeout(function () {
+        ArticleModel.find((err, art) => {
+            res.json(art[art.length - 1])
+        });
+    });
+
 });
 
 

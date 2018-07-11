@@ -1,6 +1,7 @@
 import {
     FETCH_POSTS,
-    NEW_POST
+    NEW_POST,
+    DEL_POST
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +20,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 item: action.payload
+            }
+        case DEL_POST:
+            return {
+                ...state,
+                items: action.payload
             }
         default:
             return state;

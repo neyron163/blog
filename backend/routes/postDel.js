@@ -5,16 +5,14 @@ import ArticleModel from '../models/articles';
 const router = express.Router();
 
 router.post('/', (req, res) => {
-    console.log(req.body.ID)
     ArticleModel.findByIdAndRemove(req.body.ID, (err, or) => {
         if (err) {
             console.error(err);
         }
     });
-
     ArticleModel.find((err, articles) => {
-        res.json(articles);
-    })
+        res.json(articles.reverse());
+    });
 
     // articlesJson.unshift(req.body);
     // res.json(articlesJson[0]);
