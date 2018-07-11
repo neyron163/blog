@@ -17,6 +17,6 @@
     cursor: pointer;
     border: none;
 }
-/* .flex-article .delete{
-    pointer-events: none;
-} */
+.flex-article .delete span{
+    font-size: 0;
+}

@@ -10,7 +10,6 @@ class Posts extends Component {
 
         this.state = {
             ID: {},
-            postsID: []
         }
 
         this.onClick = this.onClick.bind(this);
@@ -33,28 +32,26 @@ class Posts extends Component {
         this.props.deletePost(this.state.ID);
     }
     onClick(e){
-        console.log(e.target.textContent)
-    //    this.setState({ 
-    //         ID: e.target.parentElement.parentElement.id
-    //    });
+        this.props.posts.map( (post, i) => {
+            if(i === parseInt(e.target.textContent)){
+                this.setState({ ID: post._id })
+            }
+        });
     }
     render() {
-        console.log(this.state)
       const postItems = this.props.posts.map( (post, i) => {
-        //   postsId.push({ id: post._id });
           return (
             <div className="flex-article" key={post._id}>
                 <div className="left-side">
                     <h3>{post.title}</h3>
                     <p>{post.body}</p>
                 </div>
-                <form onSubmit={this.onSubmit} id={post._id}>
-                <span>{post._id}</span>
-                    <button className="delete" onClick={this.onClick} type='sumbmit'><i aria-hidden="true" className="trash circular inverted icon">{i}</i></button>
+                <form onSubmit={this.onSubmit}>
+                    <button className="delete" onClick={this.onClick} type='sumbmit'><i aria-hidden="true" className="trash circular inverted icon"><span>{i}</span></i></button>
                 </form>
             </div>
       )
-    })
+    });
     return (
       <div>
         {postItems}
@@ -68,7 +65,7 @@ Posts.propTypes = {
     posts: PropTypes.array.isRequired,
     newPost: PropTypes.object,
     deletePost: PropTypes.func.isRequired
-}
+};
 
 const mapStateToProps = state => ({
     posts: state.posts.items,
