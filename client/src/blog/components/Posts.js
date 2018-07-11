@@ -9,11 +9,13 @@ class Posts extends Component {
         super(props);
 
         this.state = {
-            ID: {}
+            ID: {},
+            postsID: []
         }
 
         this.onClick = this.onClick.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
     }
 
     componentWillMount() {
@@ -29,28 +31,17 @@ class Posts extends Component {
     onSubmit(e) {
         e.preventDefault();
         this.props.deletePost(this.state.ID);
-        // fetch('/postsDel', {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({ID: this.state.ID})
-        // })
-        // .then(res => res.json())
-        // .then(resJson => console.log(resJson))
-        // .then(post => dispatch({
-        //     type: NEW_POST,
-        //     payload: post
-        // }));
-
     }
     onClick(e){
-       this.setState({ 
-            ID: e.target.parentElement.parentElement.id
-       });
+        console.log(e.target.textContent)
+    //    this.setState({ 
+    //         ID: e.target.parentElement.parentElement.id
+    //    });
     }
-  render() {
-      const postItems = this.props.posts.map(post => {
+    render() {
+        console.log(this.state)
+      const postItems = this.props.posts.map( (post, i) => {
+        //   postsId.push({ id: post._id });
           return (
             <div className="flex-article" key={post._id}>
                 <div className="left-side">
@@ -59,9 +50,7 @@ class Posts extends Component {
                 </div>
                 <form onSubmit={this.onSubmit} id={post._id}>
                 <span>{post._id}</span>
-                    <div className="right-side">
-                        <button className="delete" onClick={this.onClick} type='sumbmit'>del</button>
-                    </div>
+                    <button className="delete" onClick={this.onClick} type='sumbmit'><i aria-hidden="true" className="trash circular inverted icon">{i}</i></button>
                 </form>
             </div>
       )

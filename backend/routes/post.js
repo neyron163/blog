@@ -1,5 +1,4 @@
 import express from 'express';
-import articlesJson from '../models/articlesJson';
 import ArticleModel from '../models/articles';
 
 const router = express.Router();

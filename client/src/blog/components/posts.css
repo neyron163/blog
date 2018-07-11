@@ -12,11 +12,11 @@
 .flex-article form span{
     display: none;
 }
-.flex-article .right-side .delete{
+.flex-article .delete{
     background: none;
-    border: 2px solid black;
-    border-radius: 15px;
-    padding: 5px 15px; 
     cursor: pointer;
-    transition: all 0.8s;
+    border: none;
 }
+/* .flex-article .delete{
+    pointer-events: none;
+} */

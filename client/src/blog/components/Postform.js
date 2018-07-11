@@ -57,17 +57,19 @@ class Postform extends Component {
           <form onSubmit={this.onSubmit}>
 
             <div className={this.activeClass()}>
-              <label>Title: </label><br />
-              <input type="text" name="title" onChange={this.onChange} value={this.state.title} />
+              <div className="ui long input">
+                    <input type="text" placeholder="enter your title" name="title" onChange={this.onChange} value={this.state.title} />
+              </div>
             </div>
 
             <div className={this.activeClass()}>
-              <label>Body: </label><br />
-              <textarea name="body" value={this.state.body} onChange={this.onChange} />
+            <div className="ui long input">
+                <input name="body" placeholder="enter your description" value={this.state.body} onChange={this.onChange} />
+              </div>
             </div>
             
             <br />
-            <button type='sumbmit'>Sumbmit</button>
+            <button className="ui red button" type='sumbmit'>Sumbmit</button>
           </form>
         </div>
       );
