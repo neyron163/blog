@@ -1,19 +1,21 @@
-// import express from 'express';
-// import articlesJson from '../models/articlesJson';
+import express from 'express';
+import ArticleModel from '../models/articles';
 
-// const router = express.Router();
+const router = express.Router();
 
-// let numberSingelArticle;
 
-// const nameID = articlesJson.map((el, i) => {
-
+const nameID = () => {
+    ArticleModel.find((err, post) => {
+        post.map(el => {
+            el._id
+        })
+    });
 //     numberSingelArticle = i;
 //     return el.title.split(' ').join('-');
+};
+router.get(`/:${nameID()}`, (req, res) => {
+    res.send('Hello')
+    // res.json(articlesJson[numberSingelArticle]);
+});
 
-// });
-
-// router.get(`/:${nameID}`, (req, res) => {
-//     res.json(articlesJson[numberSingelArticle]);
-// });
-
-// export default router;
+export default router;

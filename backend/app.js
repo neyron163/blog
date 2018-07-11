@@ -11,7 +11,7 @@ import index from './routes/index';
 import posts from './routes/post';
 import postForm from './routes/postForm';
 import postDel from './routes/postDel';
-// import singelPost from './routes/singelPost';
+import singelPost from './routes/singelPost';
 import mongoose from 'mongoose';
 
 const mongoDB = 'mongodb://127.0.0.1:27017/blog';
@@ -54,7 +54,7 @@ app.use('/api', index);
 app.use('/posts', posts);
 app.use('/postsForm', postForm);
 app.use('/postsDel', postDel);
-// app.use('/', singelPost);
+app.use('/', singelPost);
 
 
 // catch 404 and forward to error handler
