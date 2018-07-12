@@ -45,9 +45,9 @@ class Postform extends Component {
   }
   activeClass(){
       if(this.state.classActive){
-          return 'form-input';
+          return "ui long error input";
       }else{
-          return '';
+          return "ui long input";
       }
   }
   render() {
@@ -55,18 +55,13 @@ class Postform extends Component {
         <div>
           <h1>Add Post</h1>
           <form onSubmit={this.onSubmit}>
-
-            <div className={this.activeClass()}>
-              <div className="ui long input">
+              <div className={this.activeClass()}>
                     <input type="text" placeholder="enter your title" name="title" onChange={this.onChange} value={this.state.title} />
-              </div>
             </div>
 
             <div className={this.activeClass()}>
-            <div className="ui long input">
                 <input name="body" placeholder="enter your description" value={this.state.body} onChange={this.onChange} />
               </div>
-            </div>
             
             <br />
             <button className="ui red button" type='sumbmit'>Sumbmit</button>
