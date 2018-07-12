@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { fetchPosts, deletePost } from '../actions/postActions';
 import './posts.css';
 
@@ -44,13 +45,17 @@ class Posts extends Component {
         });
     }
     render() {
-    
+        const Child = ({ match }) => (
+            <div>
+              <h3>ID: {match.params.id}</h3>
+            </div>
+          );
       const postItems = this.props.posts.map( (post, i) => {
           return (
             <div className="flex-article" key={post._id}>
                 <div className="left-side">
-                    <h3>{post.title}</h3>
-                    <p>{post.body}</p>
+                <Link to={post._id}>{post.title}</Link>
+                <p>{post.body}</p>
                 </div>
 
                 <form onSubmit={this.onSubmit}>
@@ -66,9 +71,12 @@ class Posts extends Component {
       )
     });
     return (
-      <div>
-        {postItems}
-      </div>
+        <Router>
+            <div>
+                {postItems}
+                <Route path="/:id" component={Child} />
+            </div>
+      </Router>
     );
   }
 }
