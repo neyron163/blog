@@ -20,3 +20,22 @@
 .flex-article .delete span{
     font-size: 0;
 }
+.flex-article .more-container{
+    cursor: pointer;
+    position: relative;
+}
+.flex-article .active .popup-container{
+    display: block;
+}
+.flex-article .icon{
+    position: relative;
+    z-index: 2;
+}
+.flex-article .popup-container{
+    background: gray;
+    padding: 30px 40px;
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    /* display: none; */
+}

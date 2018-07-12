@@ -10,11 +10,12 @@ class Posts extends Component {
 
         this.state = {
             ID: {},
+            activeClass: false
         }
 
         this.onClick = this.onClick.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
+        this.onToggleClass = this.onToggleClass.bind(this);
     }
 
     componentWillMount() {
@@ -26,6 +27,10 @@ class Posts extends Component {
         if(nextProps.newPost){
             this.props.posts.unshift(nextProps.newPost);
         }
+    }
+    onToggleClass() {
+        // this.setState({ activeClass: !this.state.activeClass });
+        // console.log(1)
     }
     onSubmit(e) {
         e.preventDefault();
@@ -39,6 +44,7 @@ class Posts extends Component {
         });
     }
     render() {
+    
       const postItems = this.props.posts.map( (post, i) => {
           return (
             <div className="flex-article" key={post._id}>
@@ -46,9 +52,16 @@ class Posts extends Component {
                     <h3>{post.title}</h3>
                     <p>{post.body}</p>
                 </div>
+
                 <form onSubmit={this.onSubmit}>
-                    <button className="delete" onClick={this.onClick} type='sumbmit'><i aria-hidden="true" className="trash circular inverted icon"><span>{i}</span></i></button>
+                    <div className={this.state.activeClass ? "more-container active" : "more-container"}>
+                         <i className="ellipsis vertical icon large" onClick={this.onToggleClass}></i>
+                        <div className="popup-container">
+                            <button className="delete" onClick={this.onClick} type='sumbmit'><i aria-hidden="true" className="trash circular inverted icon"><span>{i}</span></i></button>
+                        </div>
+                    </div>
                 </form>
+
             </div>
       )
     });
