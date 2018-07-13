@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 import { fetchPosts, deletePost } from '../actions/postActions';
 import './posts.css';
 
@@ -47,7 +47,7 @@ class Posts extends Component {
     render() {
         const Child = ({ match }) => (
             <div>
-              <h3>ID: {match.params.id}</h3>
+            <h3>ID: {match.params.id}</h3>
             </div>
           );
       const postItems = this.props.posts.map( (post, i) => {
@@ -71,21 +71,19 @@ class Posts extends Component {
       )
     });
     return (
-        <Router>
             <div>
                 {postItems}
                 <Route path="/:id" component={Child} />
             </div>
-      </Router>
     );
   }
 }
 
 Posts.propTypes = {
     fetchPosts: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
-    newPost: PropTypes.object,
-    deletePost: PropTypes.func.isRequired
+    newPost: PropTypes.object
 };
 
 const mapStateToProps = state => ({
