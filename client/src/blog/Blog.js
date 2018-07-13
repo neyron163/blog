@@ -7,19 +7,21 @@ import store, { history } from './store';
 import Header from './components/header/Header';
 import Posts from './components/Posts';
 import PostForm from './components/Postform';
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+    ConnectedRouter
+  } from "react-router-redux";
 
 class Blog extends Component {
   render() {
     return (
         <Provider store={store}>
-                <Router>
-            <div className="content">
-                <Header />
-                <PostForm />
-                <Posts />
-            </div>
-           </Router>
+         <ConnectedRouter history={history}>
+                    <div className="content">
+                        <Header />
+                        <PostForm />
+                        <Posts />
+                    </div>
+        </ConnectedRouter>
       </Provider>
     );
   }
