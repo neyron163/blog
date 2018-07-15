@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter as Route, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { fetchPosts, deletePost } from '../actions/postActions';
+import { history } from '../store';
+import {
+    ConnectedRouter
+  } from "react-router-redux";
+
 import './posts.css';
 
 class Posts extends Component {
@@ -11,7 +16,8 @@ class Posts extends Component {
 
         this.state = {
             ID: {},
-            activeClass: false
+            activeClass: false,
+            test: null
         }
 
         this.onClick = this.onClick.bind(this);
@@ -44,12 +50,19 @@ class Posts extends Component {
             }
         });
     }
+    test(t) {
+        return this.props.posts.map( (post, i) => {
+            if(post._id === t){
+                return t;
+            }
+        });
+    }
     render() {
-        const Child = ({ match }) => (
+    const Child = ({ match }) => (
             <div>
-            <h3>ID: {match.params.id}</h3>
+              <h3>ID: {this.test(match.params.id)}</h3>
             </div>
-          );
+      );
       const postItems = this.props.posts.map( (post, i) => {
           return (
             <div className="flex-article" key={post._id}>
@@ -71,10 +84,12 @@ class Posts extends Component {
       )
     });
     return (
+        <ConnectedRouter history={history}>
             <div>
                 {postItems}
-                <Route path="/:id" component={Child} />
+                <Route exact path="/:id" component={Child} />
             </div>
+        </ConnectedRouter>
     );
   }
 }
