@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Route, Link} from "react-router-dom";
-import {fetchPosts, deletePost} from '../actions/postActions';
+import {fetchPosts, editPost, deletePost} from '../actions/postActions';
 import {history} from '../store';
 import {ConnectedRouter} from "react-router-redux";
 
@@ -13,19 +13,20 @@ class Posts extends Component {
         super(props);
 
         this.state = {
-            ID: {},
-            activeClass: false,
-            test: null
+            activeClass: false
         }
 
-        this.onClick = this
-            .onClick
+        this.onSubmitDelete = this
+            .onSubmitDelete
             .bind(this);
-        this.onSubmit = this
-            .onSubmit
+        this.onSubmitEdit = this
+            .onSubmitEdit
             .bind(this);
         this.onToggleClass = this
             .onToggleClass
+            .bind(this);
+        this.onClickEdit = this
+            .onClickEdit
             .bind(this);
     }
 
@@ -44,26 +45,33 @@ class Posts extends Component {
                 .unshift(nextProps.newPost);
         }
     }
-    onToggleClass() {
-        this.setState({ activeClass: !this.state.activeClass });
+    onToggleClass(e) {
+        e.target.parentElement.classList.toggle('active');
+        // this.setState({ activeClass: !this.state.activeClass });
     }
-    onSubmit(e) {
+    onClickEdit(e) {
+        // e.target.parentElement.classList.toggle('edit-active');
+    }
+    onSubmitEdit(e) {
         e.preventDefault();
+        let ID = {id: 1};
+        this
+        .props
+        .editPost(ID);
+    }
+    onSubmitDelete(e) {
+        e.preventDefault();
+        let ID;
+        this.props.posts.map((post, i) => {
+            if (i === parseInt(e.target.textContent)) {
+                ID = post._id;
+            }
+        });
         this
             .props
-            .deletePost(this.state.ID);
+            .deletePost(ID);
     }
-    onClick(e) {
-        this
-            .props
-            .posts
-            .map((post, i) => {
-                if (i === parseInt(e.target.textContent)) {
-                    this.setState({ID: post._id})
-                }
-            });
-    }
-    singlePost(sPost, match) {
+    singlePost(sPost) {
         return this
             .props
             .posts
@@ -90,21 +98,36 @@ class Posts extends Component {
                             <p>{post.body}</p>
                         </div>
 
-                        <form onSubmit={this.onSubmit}>
-                            <div
-                                className={this.state.activeClass
-                                ? "more-container active"
-                                : "more-container"}>
+                            <div className="more-container">
                                 <i className="ellipsis vertical icon large" onClick={this.onToggleClass}></i>
                                 <div className="popup-container">
-                                    <button className="delete" onClick={this.onClick} type='sumbmit'>
-                                        <i aria-hidden="true" className="trash circular inverted icon">
-                                            <span>{i}</span>
-                                        </i>
-                                    </button>
+                                <div className="wrapper">
+
+{/* onSubmit={this.onSubmitEdit} */}
+                                      {/* <form> */}
+                                            <button type="sumbmit" className="edites" onClick={this.onClickEdit}>
+                                                <div className="remove">
+                                                        <i aria-hidden="true" className="edit icon">
+                                                            <span>{i}</span>
+                                                        </i>
+                                                </div>
+                                                <div>Edit Post</div>
+                                            </button>
+                                        {/* </form> */}
+
+                                        <form onSubmit={this.onSubmitDelete}>
+                                            <button type="sumbmit" className="delete">
+                                                <div className="remove">
+                                                        <i aria-hidden="true" className="close icon">
+                                                            <span>{i}</span>
+                                                        </i>
+                                                </div>
+                                                <div>Delete Post</div>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
 
                     </div>
                 )
@@ -128,6 +151,7 @@ class Posts extends Component {
 
 Posts.propTypes = {
     fetchPosts: PropTypes.func.isRequired,
+    editPost: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
     newPost: PropTypes.object
@@ -135,4 +159,4 @@ Posts.propTypes = {
 
 const mapStateToProps = state => ({posts: state.posts.items, newPost: state.posts.item});
 
-export default connect(mapStateToProps, {fetchPosts, deletePost})(Posts);
+export default connect(mapStateToProps, {fetchPosts, editPost,  deletePost})(Posts);

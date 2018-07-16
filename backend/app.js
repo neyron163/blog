@@ -11,6 +11,7 @@ import index from './routes/index';
 import posts from './routes/post';
 import postForm from './routes/postForm';
 import postDel from './routes/postDel';
+import postEdit from './routes/postEdit';
 import singelPost from './routes/singelPost';
 import mongoose from 'mongoose';
 
@@ -53,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', index);
 app.use('/posts', posts);
 app.use('/postsForm', postForm);
+app.use('/postsEdit', postEdit);
 app.use('/postsDel', postDel);
 app.use('/', singelPost);
 

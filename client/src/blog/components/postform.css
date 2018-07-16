@@ -1,3 +1,11 @@
+@keyframes anim {
+    0% { transform: translateX(-1%) }
+    25% { transform: translateX(1%) }
+    50% { transform: translateX(-2%) }
+    75% { transform: translateX(2%) }
+    100% { transform: translateX(0%) }
+}
+
 .top-side{
     margin-bottom: 45px;
     margin-top: 105px;
@@ -16,4 +24,7 @@
 }
 .button{
  margin: 0 auto;
+}
+.error{
+    animation: anim 0.4s ease-in-out;
 }

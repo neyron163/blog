@@ -9,10 +9,10 @@
 .flex-article .left-side{
     margin-right: 20px;
 }
-.flex-article form span{
+.flex-article span{
     display: none;
 }
-.flex-article .delete{
+.flex-article .delete, .flex-article .edites{
     background: none;
     cursor: pointer;
     border: none;
@@ -21,24 +21,54 @@
     font-size: 0;
 }
 .flex-article .more-container{
-    cursor: pointer;
     position: relative;
 }
-.flex-article .active .popup-container{
-    display: block;
+.flex-article .ellipsis{
+    cursor: pointer;
 }
+/* .flex-article .active .popup-container{
+    display: block;
+} */
 .flex-article .icon{
     position: relative;
     z-index: 2;
 }
 .flex-article .popup-container{
-    background: gray;
-    padding: 30px 40px;
     position: absolute;
     top: -5px;
-    right: 5px;
-    display: none;
+    right: -120px;
+    overflow: hidden;
 }
+
+.flex-article .popup-container .wrapper{
+    transform: translateY(-200%);
+    transition: transform 0.2s;
+    margin: 5px;
+    box-shadow: 0px 1px 5px 1px rgba(168, 168, 168, 0.7);
+    border-radius: 5px;
+}
+.flex-article .active .popup-container .wrapper{
+    transform: translateY(0);
+}
+.flex-article .popup-container .delete, .flex-article .popup-container .edites{
+    display: flex;
+    font-weight: 700;
+    padding: 10px 10px;
+    width: 100%;
+}
+.flex-article .popup-container .delete, .flex-article .popup-container .edites{
+    transition: all 0.4s;
+    border-radius: 5px;
+}
+.flex-article .popup-container .delete:hover{
+    background: rgba(168, 168, 168, 0.3);
+    color: #db2828;
+}
+.flex-article .popup-container .edites:hover{
+    background: rgba(168, 168, 168, 0.3);
+    color: #db2828;
+}
+
 .flex-article .left-side h3 a{
     color: #db2828;
 }

@@ -62,9 +62,8 @@ class Postform extends Component {
         if(check){
             if (this.state.classActive) {
                 return "ui long error input";
-            } else {
-                return "ui long input";
             }
+                return "ui long input";
         }else{
             if (this.state.classActive) {
                 return "filed-form error";
