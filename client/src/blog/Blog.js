@@ -14,38 +14,47 @@ import PostForm from './components/Postform';
 import { Dropdown, Menu } from 'semantic-ui-react'
 
 class Blog extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            h1: 32
+        }
+    }
     render() {
         const optionsH1 = [
-            { key: 1, text: 'Font-size 16px', value: "H1-16px" },
-            { key: 2, text: 'Font-size 24px', value: "H1-24px" },
-            { key: 3, text: 'Font-size 32px', value: "H1-32px" },
-            { key: 4, text: 'Font-size 42px', value: "H1-42px" },
-            { key: 5, text: 'Font-size 52px', value: "H1-52px" },
-            { key: 6, text: 'Font-size 62px', value: "H1-62px" },
-            { key: 7, text: 'Font-size 72px', value: "H1-72px" },
+            { key: 1, text: '16px', value: "16" },
+            { key: 2, text: '24px', value: "24" },
+            { key: 3, text: '32px', value: "32" },
+            { key: 4, text: '42px', value: "42" },
+            { key: 5, text: '52px', value: "52" },
+            { key: 6, text: '62px', value: "62" },
+            { key: 7, text: '72px', value: "72" },
           ]
           const optionsH3 = [
-            { key: 1, text: 'Font-size 16px', value: "H3-16px" },
-            { key: 2, text: 'Font-size 24px', value: "H3-24px" },
-            { key: 3, text: 'Font-size 32px', value: "H3-32px" },
-            { key: 4, text: 'Font-size 42px', value: "H3-42px" },
+            { key: 1, text: '16px', value: "16" },
+            { key: 2, text: '24px', value: "24" },
+            { key: 3, text: '32px', value: "32" },
+            { key: 4, text: '42px', value: "42" },
           ]
           const optionsDescription = [
-            { key: 1, text: 'Font-size 6px', value: "H3-6px" },
-            { key: 2, text: 'Font-size 8px', value: "H3-8px" },
-            { key: 3, text: 'Font-size 16px', value: "H3-16px" },
-            { key: 4, text: 'Font-size 24px', value: "H3-24px" },
-            { key: 5, text: 'Font-size 32px', value: "H3-32px" },
+            { key: 1, text: '6px', value: "6" },
+            { key: 2, text: '8px', value: "8" },
+            { key: 3, text: '16px', value: "16" },
+            { key: 4, text: '24px', value: "24" },
+            { key: 5, text: '32px', value: "32" },
           ]
+        //   const font = {
+        //       fontSize: this.state.h1 + "px"
+        //   }
         return (
             <Provider store={store}>
                     <div className="content">
                         <Header />
                         <PostForm />
                         <Menu compact>
-                            <Dropdown text='Font-size - H1' options={optionsH1} simple item />
-                            <Dropdown text='Font-size - H3' options={optionsH3} simple item />
-                            <Dropdown text='Font-size - description' options={optionsDescription} simple item />
+                            <Dropdown onChange={(e, { value }) => this.setState({ h1: value }) } text='H1' options={optionsH1} simple item />
+                            <Dropdown onChange={(e, { value }) => alert(value)} text='H3' options={optionsH3} simple item />
+                            <Dropdown onChange={(e, { value }) => alert(value)} text='Description' options={optionsDescription} simple item />
                         </Menu>
                         <Posts />
                     </div>

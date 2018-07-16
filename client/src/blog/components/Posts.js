@@ -45,14 +45,10 @@ class Posts extends Component {
                 .unshift(nextProps.newPost);
         }
     }
-    onToggleClass(e) {
-        this.props.posts.forEach((post, i) => {
-           if(parseInt(e.target.textContent) === i){
-               console.log(this)
-           }
-        });
-        this.setState({ activeClass: !this.state.activeClass });
-
+    onToggleClass(e, post) {
+        // e.target.parentElement.classList.toggle('active');
+        // нужно передать в стор запись о событие обычной проверкой true/false, и дальше проверить функцией
+        // если у пропра поста true то добавить класс иначе удалить
     }
     onClickEdit(e) {
         // e.target.parentElement.classList.toggle('edit-active');
@@ -64,17 +60,9 @@ class Posts extends Component {
         .props
         .editPost(ID);
     }
-    onSubmitDelete(e) {
+    onSubmitDelete(e, post) {
         e.preventDefault();
-        let ID;
-        this.props.posts.map((post, i) => {
-            if (i === parseInt(e.target.textContent)) {
-                ID = post._id;
-            }
-        });
-        this
-            .props
-            .deletePost(ID);
+        this.props.deletePost(post._id);
     }
     singlePost(sPost) {
         return this
@@ -104,12 +92,10 @@ class Posts extends Component {
                         </div>
 
                             <div className={this.state.activeClass ? "more-container active" : "more-container"}>
-                                <i className="ellipsis vertical icon large" onClick={this.onToggleClass}><span>{i}</span></i>
+                                <i className="ellipsis vertical icon large" onClick={(e) => this.onToggleClass(e, post)}><span>{i}</span></i>
                                 <div className="popup-container">
                                 <div className="wrapper">
 
-{/* onSubmit={this.onSubmitEdit} */}
-                                      {/* <form> */}
                                             <button type="sumbmit" className="edites" onClick={this.onClickEdit}>
                                                 <div className="remove">
                                                         <i aria-hidden="true" className="edit icon">
@@ -118,22 +104,21 @@ class Posts extends Component {
                                                 </div>
                                                 <div>Edit Post</div>
                                             </button>
-                                        {/* </form> */}
 
-                                        <form onSubmit={this.onSubmitDelete}>
-                                            <button type="sumbmit" className="delete">
-                                                <div className="remove">
-                                                        <i aria-hidden="true" className="close icon">
-                                                            <span>{i}</span>
-                                                        </i>
-                                                </div>
-                                                <div>Delete Post</div>
-                                            </button>
-                                        </form>
+                                            <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
+                                                <button type="sumbmit" className="delete">
+                                                    <div className="remove">
+                                                            <i aria-hidden="true" className="close icon">
+                                                                {/* <span>{i}</span> */}
+                                                            </i>
+                                                    </div>
+                                                    <div>Delete Post</div>
+                                                </button>
+                                            </form>
+
                                     </div>
                                 </div>
                             </div>
-
                     </div>
                 )
             });
