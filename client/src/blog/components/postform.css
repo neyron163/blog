@@ -1,6 +1,19 @@
-.form-input input{
-    outline: 1px solid red;
+.top-side{
+    margin-bottom: 45px;
+    margin-top: 105px;
 }
-.form-input textarea{
-    outline: 1px solid red; 
+.top-side h1 {
+    text-align: center;
+}
+.field{
+    margin-top: 20px;
+}
+.long{
+    width: 100%;
+}
+.filed-form{
+    margin-top: 20px;
+}
+.button{
+ margin: 0 auto;
 }

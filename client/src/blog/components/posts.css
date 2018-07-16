@@ -37,5 +37,11 @@
     position: absolute;
     top: -5px;
     right: 5px;
-    /* display: none; */
+    display: none;
+}
+.flex-article .left-side h3 a{
+    color: #db2828;
+}
+.p-inner{
+    margin-bottom: 25px;
 }

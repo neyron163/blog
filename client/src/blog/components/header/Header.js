@@ -26,7 +26,7 @@ class Header extends Component {
       <div className="head">
         <header>
             <div className="flex-container">
-                <div className="nick-name">Welcome to Neyron's blog</div>
+                <a href="/"><div className="nick-name">Welcome to blog</div></a>
                     <div>
                         <button className="ui red inverted button" onClick={this.onClick}>Toggle on {this.state.name ? 'White' : 'Dark'} Theme</button>
                     </div>

@@ -10,13 +10,13 @@ header .flex-container{
     display: flex;
     justify-content: space-between;
   }
-  /* header .btn{
-      border: none;
-      border-radius: 7px;
-      background: #000000;
-      padding: 15px 25px;
-      color: white;
-      text-transform: uppercase;
-      max-width: 150px;
-      cursor: pointer;
-  } */
+header .flex-container .nick-name{
+    line-height: 40px;
+}
+header a {
+    color: #db2828;
+    transition: color 0.6s;
+}
+header a:hover{
+    color: hsla(0, 71%, 51%, 0.514);
+}
