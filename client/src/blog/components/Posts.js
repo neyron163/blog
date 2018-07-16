@@ -145,7 +145,7 @@ class Posts extends Component {
             );
         return (
             <ConnectedRouter history={history}>
-                <div>
+                <div className="posts">
                     <Route exact path="/" component={postItems}/>
                     <Route exact path="/:id" component={Child}/>
                 </div>
