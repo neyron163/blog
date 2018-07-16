@@ -22,13 +22,14 @@
 }
 .flex-article .more-container{
     position: relative;
+    transition: color 0.4s;
+}
+.flex-article .active {
+    color: #db2828;
 }
 .flex-article .ellipsis{
     cursor: pointer;
 }
-/* .flex-article .active .popup-container{
-    display: block;
-} */
 .flex-article .icon{
     position: relative;
     z-index: 2;

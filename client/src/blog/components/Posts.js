@@ -46,8 +46,13 @@ class Posts extends Component {
         }
     }
     onToggleClass(e) {
-        e.target.parentElement.classList.toggle('active');
-        // this.setState({ activeClass: !this.state.activeClass });
+        this.props.posts.forEach((post, i) => {
+           if(parseInt(e.target.textContent) === i){
+               console.log(this)
+           }
+        });
+        this.setState({ activeClass: !this.state.activeClass });
+
     }
     onClickEdit(e) {
         // e.target.parentElement.classList.toggle('edit-active');
@@ -98,8 +103,8 @@ class Posts extends Component {
                             <p>{post.body}</p>
                         </div>
 
-                            <div className="more-container">
-                                <i className="ellipsis vertical icon large" onClick={this.onToggleClass}></i>
+                            <div className={this.state.activeClass ? "more-container active" : "more-container"}>
+                                <i className="ellipsis vertical icon large" onClick={this.onToggleClass}><span>{i}</span></i>
                                 <div className="popup-container">
                                 <div className="wrapper">
 
