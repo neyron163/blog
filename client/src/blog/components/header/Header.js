@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Enter from '../popups/Enter';
 import './header.css';
 
 
@@ -26,9 +27,10 @@ class Header extends Component {
       <div className="head">
         <header>
             <div className="flex-container">
-                <a href="/"><div className="nick-name">Welcome to blog</div></a>
+                <a href="/"><div className="nick-name">Welcome to IT blog</div></a>
                     <div>
-                        <button className="ui red inverted button" onClick={this.onClick}>Toggle on {this.state.name ? 'White' : 'Dark'} Theme</button>
+                        <Enter />
+                        <button className="ui red long button" onClick={this.onClick}>Toggle on {this.state.name ? 'White' : 'Dark'} Theme</button>
                     </div>
             </div>
         </header>

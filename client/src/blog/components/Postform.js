@@ -17,7 +17,8 @@ class Postform extends Component {
         this.state = {
             title: '',
             body: '',
-            classActive: false
+            classActive: false,
+            popupEditor: false
         };
 
         this.onChange = this.onChange.bind(this);
@@ -47,7 +48,8 @@ class Postform extends Component {
 
         const post = {
             title: this.state.title,
-            body: this.state.body
+            body: this.state.body,
+            popupEditor: this.state.popupEditor
         }
 
         this.props.createPost(post);

@@ -6,6 +6,7 @@ import {fetchPosts, editPost, deletePost} from '../actions/postActions';
 import {history} from '../store';
 import {ConnectedRouter} from "react-router-redux";
 
+import Social from './social/Social';
 import './posts.css';
 
 class Posts extends Component {
@@ -13,7 +14,7 @@ class Posts extends Component {
         super(props);
 
         this.state = {
-            activeClass: false
+            activeClass: false,
         }
 
         this.onSubmitDelete = this
@@ -22,9 +23,9 @@ class Posts extends Component {
         this.onSubmitEdit = this
             .onSubmitEdit
             .bind(this);
-        this.onToggleClass = this
-            .onToggleClass
-            .bind(this);
+        // this.onToggleClass = this
+        //     .onToggleClass
+        //     .bind(this);
         this.onClickEdit = this
             .onClickEdit
             .bind(this);
@@ -45,20 +46,19 @@ class Posts extends Component {
                 .unshift(nextProps.newPost);
         }
     }
-    onToggleClass(e, post) {
-        // e.target.parentElement.classList.toggle('active');
-        // нужно передать в стор запись о событие обычной проверкой true/false, и дальше проверить функцией
-        // если у пропра поста true то добавить класс иначе удалить
+    onToggleClass() {
+        console.log(this.myButton)
+        // this.myInput.setAttribute("class", "more-container active");
     }
     onClickEdit(e) {
         // e.target.parentElement.classList.toggle('edit-active');
     }
     onSubmitEdit(e) {
-        e.preventDefault();
-        let ID = {id: 1};
-        this
-        .props
-        .editPost(ID);
+        // e.preventDefault();
+        // let ID = {id: 1};
+        // this
+        // .props
+        // .editPost(ID);
     }
     onSubmitDelete(e, post) {
         e.preventDefault();
@@ -74,6 +74,9 @@ class Posts extends Component {
                         <div key={post._id + i}>
                             <h1>{post.title}</h1>
                             <div className="p-inner">{post.body}</div>
+                            <div className="p-inner">{post.body}</div>
+                            <div className="p-inner">{post.body}</div>
+                            <img src={post.image} />
                         </div>
                     )
                 }
@@ -89,18 +92,19 @@ class Posts extends Component {
                         <div className="left-side">
                             <h3><Link to={post._id}>{post.title}</Link></h3>
                             <p>{post.body}</p>
+                            <img src={post.image} />
+                            <Link to={post._id}>Learn more...</Link>
                         </div>
 
-                            <div className={this.state.activeClass ? "more-container active" : "more-container"}>
-                                <i className="ellipsis vertical icon large" onClick={(e) => this.onToggleClass(e, post)}><span>{i}</span></i>
+                            <div className="more-container" ref={ button => { this.myButton = button }}>
+                                {/* <i className="ellipsis vertical icon large" onClick={() => this.onToggleClass()}></i> */}
+                                <i className="ellipsis vertical icon large" onClick={this.onToggleClass.bind(this)}></i>
                                 <div className="popup-container">
                                 <div className="wrapper">
 
                                             <button type="sumbmit" className="edites" onClick={this.onClickEdit}>
                                                 <div className="remove">
-                                                        <i aria-hidden="true" className="edit icon">
-                                                            <span>{i}</span>
-                                                        </i>
+                                                        <i aria-hidden="true" className="edit icon"></i>
                                                 </div>
                                                 <div>Edit Post</div>
                                             </button>
@@ -108,9 +112,7 @@ class Posts extends Component {
                                             <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
                                                 <button type="sumbmit" className="delete">
                                                     <div className="remove">
-                                                            <i aria-hidden="true" className="close icon">
-                                                                {/* <span>{i}</span> */}
-                                                            </i>
+                                                            <i aria-hidden="true" className="close icon"></i>
                                                     </div>
                                                     <div>Delete Post</div>
                                                 </button>
@@ -125,7 +127,6 @@ class Posts extends Component {
             const Child = ({match}) => (
                 <div>
                     {this.singlePost(match.params.id, match, postItems)}
-                    <img src="/images/cars.jpg" />
                 </div>
             );
         return (
@@ -133,6 +134,7 @@ class Posts extends Component {
                 <div className="posts">
                     <Route exact path="/" component={postItems}/>
                     <Route exact path="/:id" component={Child}/>
+                    <Social />
                 </div>
             </ConnectedRouter>
         );

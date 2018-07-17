@@ -9,6 +9,7 @@ header{
 header .flex-container{
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 header .flex-container .nick-name{
     line-height: 40px;

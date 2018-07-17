@@ -6,7 +6,9 @@ const Schema = mongoose.Schema;
 const Article = new Schema({
     userId: Number,
     title: String,
-    body: String
+    body: String,
+    image: String,
+    popupEditor: Boolean
 });
 
 

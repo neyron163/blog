@@ -8,6 +8,10 @@
 }
 .flex-article .left-side{
     margin-right: 20px;
+    margin-bottom: 20px;
+}
+.flex-article:last-child .left-side{
+    margin-bottom: 0;
 }
 .flex-article span{
     display: none;

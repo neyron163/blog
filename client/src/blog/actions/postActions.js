@@ -29,13 +29,13 @@ export const createPost = (postData) => dispatch => {
         }));
 };
 
-export const editPost = (postID) => dispatch => {
+export const editPost = (postID, postEditor) => dispatch => {
     fetch('/postsEdit', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ ID: postID})
+            body: JSON.stringify({ ID: postID, postEditor: postEditor})
         })
         .then(res => res.json())
         .then(post => dispatch({
