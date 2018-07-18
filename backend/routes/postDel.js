@@ -7,12 +7,11 @@ router.post('/', (req, res) => {
     ArticleModel.findByIdAndRemove(req.body.ID, (err) => {
         if (err) {
             console.error(err);
-        }});
-
-    ArticleModel.find((err, articles) => {
-        res.json(articles.reverse());
-    });
-
+        }}).then(() => {
+            ArticleModel.find((err, articles) => {
+                res.json(articles.reverse());
+            });
+        });
 });
 
 

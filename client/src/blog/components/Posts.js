@@ -23,9 +23,6 @@ class Posts extends Component {
         this.onSubmitEdit = this
             .onSubmitEdit
             .bind(this);
-        // this.onToggleClass = this
-        //     .onToggleClass
-        //     .bind(this);
         this.onClickEdit = this
             .onClickEdit
             .bind(this);
@@ -45,10 +42,6 @@ class Posts extends Component {
                 .posts
                 .unshift(nextProps.newPost);
         }
-    }
-    onToggleClass() {
-        console.log(this.myButton)
-        // this.myInput.setAttribute("class", "more-container active");
     }
     onClickEdit(e) {
         // e.target.parentElement.classList.toggle('edit-active');
@@ -96,13 +89,13 @@ class Posts extends Component {
                             <Link to={post._id}>Learn more...</Link>
                         </div>
 
-                            <div className="more-container" ref={ button => { this.myButton = button }}>
-                                {/* <i className="ellipsis vertical icon large" onClick={() => this.onToggleClass()}></i> */}
-                                <i className="ellipsis vertical icon large" onClick={this.onToggleClass.bind(this)}></i>
+                            <div className="more-container">
+                                <div className="info">
+                                <i className="ellipsis vertical icon large icon-red"></i>
                                 <div className="popup-container">
                                 <div className="wrapper">
 
-                                            <button type="sumbmit" className="edites" onClick={this.onClickEdit}>
+                                            <button type="sumbmit" className="edites">
                                                 <div className="remove">
                                                         <i aria-hidden="true" className="edit icon"></i>
                                                 </div>
@@ -119,6 +112,7 @@ class Posts extends Component {
                                             </form>
 
                                     </div>
+                                </div>
                                 </div>
                             </div>
                     </div>

@@ -28,9 +28,7 @@
     position: relative;
     transition: color 0.4s;
 }
-.flex-article .active {
-    color: #db2828;
-}
+
 .flex-article .ellipsis{
     cursor: pointer;
 }
@@ -47,13 +45,10 @@
 
 .flex-article .popup-container .wrapper{
     transform: translateY(-200%);
-    transition: transform 0.2s;
+    transition: transform 0.4s ease-in-out;
     margin: 5px;
     box-shadow: 0px 1px 5px 1px rgba(168, 168, 168, 0.7);
     border-radius: 5px;
-}
-.flex-article .active .popup-container .wrapper{
-    transform: translateY(0);
 }
 .flex-article .popup-container .delete, .flex-article .popup-container .edites{
     display: flex;
@@ -82,4 +77,13 @@
 }
 .posts{
     margin-top: 35px;
+}
+.info:hover .popup-container .wrapper{
+    transform: translateY(0);
+}
+.icon-red{
+    transition: color 0.6s;
+}
+.info:hover .icon-red{
+    color: #db2828;
 }
