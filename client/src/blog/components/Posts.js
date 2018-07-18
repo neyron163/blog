@@ -69,7 +69,7 @@ class Posts extends Component {
                             <div className="p-inner">{post.body}</div>
                             <div className="p-inner">{post.body}</div>
                             <div className="p-inner">{post.body}</div>
-                            <img src={post.image} />
+                            <img src={'/images/' + post.image} />
                         </div>
                     )
                 }
@@ -85,7 +85,7 @@ class Posts extends Component {
                         <div className="left-side">
                             <h3><Link to={post._id}>{post.title}</Link></h3>
                             <p>{post.body}</p>
-                            <img src={post.image} />
+                            <img src={ '/images/' + post.image} />
                             <Link to={post._id}>Learn more...</Link>
                         </div>
 

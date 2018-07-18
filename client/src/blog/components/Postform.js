@@ -18,6 +18,7 @@ class Postform extends Component {
             title: '',
             body: '',
             selectedFile: '',
+            fileName: '',
             classActive: false,
             popupEditor: false
         };
@@ -48,14 +49,19 @@ class Postform extends Component {
         }
 
         e.preventDefault();
+        
+        this.uploadHandler();
 
         const post = {
             title: this.state.title,
             body: this.state.body,
+            image: this.state.fileName,
             popupEditor: this.state.popupEditor
         }
 
+        
         this.props.createPost(post);
+
         this.setState({
             classActive: false,
             title: '',
@@ -64,8 +70,8 @@ class Postform extends Component {
 
     }
     uploadHandler(){
-        const formData = new FormData()
-        formData.append('myFile', this.state.selectedFile, this.state.selectedFile.name)
+        const formData = new FormData();
+        formData.append('myFile', this.state.selectedFile, this.state.fileName)
         axios.post('/postsForm', formData, {
             onUploadProgress: progressEvent => {
               console.log(progressEvent.loaded / progressEvent.total)
@@ -73,7 +79,8 @@ class Postform extends Component {
         })
     }
     fileChangedHandler( e ) {
-        this.setState({ selectedFile: e.target.files[0] })
+        const file = e.target.files[0];
+        this.setState({ selectedFile: file, fileName: file.name });
     }
 
     activeClass(check) {
@@ -106,7 +113,7 @@ class Postform extends Component {
 
                 <div className="upload">
                     <input type="file" onChange={this.fileChangedHandler.bind(this)} />
-                    <button onClick={this.uploadHandler.bind(this)}>Upload!</button>
+                    {/* <button onClick={this.uploadHandler.bind(this)}>Upload!</button> */}
                 </div>
 
               <button className="ui red long button" type='sumbmit'>Sumbmit</button>
