@@ -17,7 +17,7 @@ class Postform extends Component {
         this.state = {
             title: '',
             body: '',
-            selectedFile: '',
+            selectedFile: {},
             fileName: '',
             classActive: false
         };
@@ -53,33 +53,16 @@ class Postform extends Component {
         formData.append('myFile', this.state.selectedFile, this.state.fileName);
         formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]))
 
-        const post = {
-            title: this.state.title,
-            body: this.state.body,
-            image: this.state.fileName,
-        }
-
         this.props.createPost(formData);
         
 
-        // this.setState({
-        //     classActive: false,
-        //     title: '',
-        //     body: ''
-        // });
+        this.setState({
+            classActive: false,
+            title: '',
+            body: '',
+            selectedFile: {}
+        });
 
-    }
-    uploadHandler(){
-        const body = JSON.stringify(this.state.body);
-        const formData = new FormData();
-        formData.append('myFile', this.state.selectedFile, this.state.fileName);
-        formData.append('text', JSON.stringify([{title: this.state.title}, {body: this.state.body}]))
-        this.props.createPost(formData);
-        // axios.post('/postFiles', formData, {
-        //     onUploadProgress: progressEvent => {
-        //     console.log(progressEvent.loaded / progressEvent.total == 1)
-        //     }
-        // })
     }
     fileChangedHandler( e ) {
         const file = e.target.files[0];
@@ -117,8 +100,14 @@ class Postform extends Component {
                 </div>
 
                 <div className="upload">
-                    <input type="file" onChange={this.fileChangedHandler.bind(this)} />
-                    <button onClick={this.uploadHandler.bind(this)}>Upload!</button>
+                <div class="ui action input">
+                    <label for="file" className="ui icon button ">
+                        {/* <i class="file upload icon"></i> */}
+                        <i class="file image icon"></i>
+                        <span>{this.state.fileName}</span>
+                        <input type="file" id="file" className="file-input" onChange={this.fileChangedHandler.bind(this)} />
+                    </label>
+                    </div>
                 </div>
 
               <button className="ui red long button" type='sumbmit'>Sumbmit</button>

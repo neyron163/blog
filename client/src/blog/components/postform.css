@@ -28,3 +28,6 @@
 .error{
     animation: anim 0.4s ease-in-out;
 }
+.file-input{
+    display: none;
+}
