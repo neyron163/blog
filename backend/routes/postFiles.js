@@ -1,5 +1,5 @@
 import express from 'express';
-import ArticleModel from '../models/articles';
+// import ArticleModel from '../models/articles';
 
 import multer from 'multer';
 
@@ -17,14 +17,7 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.post('/', upload.single('myFile'), (req, res) => {
-        // create new model and save it after got data
-        const Article = new ArticleModel(JSON.parse(req.body.text)[0]);
-        Article.save().then(() => {
-            // we need send back single article of base
-            ArticleModel.find((err, art) => {
-                res.json(art[art.length - 1])
-            });
-        });
+    console.log(req.file)
 });
 
 

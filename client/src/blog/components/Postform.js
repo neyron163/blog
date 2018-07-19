@@ -19,8 +19,7 @@ class Postform extends Component {
             body: '',
             selectedFile: '',
             fileName: '',
-            classActive: false,
-            popupEditor: false
+            classActive: false
         };
 
         this.onChange = this.onChange.bind(this);
@@ -50,37 +49,43 @@ class Postform extends Component {
 
         e.preventDefault();
         
-        this.uploadHandler();
+        const formData = new FormData();
+        formData.append('myFile', this.state.selectedFile, this.state.fileName);
+        formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]))
 
         const post = {
             title: this.state.title,
             body: this.state.body,
             image: this.state.fileName,
-            popupEditor: this.state.popupEditor
         }
 
+        this.props.createPost(formData);
         
-        this.props.createPost(post);
 
-        this.setState({
-            classActive: false,
-            title: '',
-            body: ''
-        });
+        // this.setState({
+        //     classActive: false,
+        //     title: '',
+        //     body: ''
+        // });
 
     }
     uploadHandler(){
+        const body = JSON.stringify(this.state.body);
         const formData = new FormData();
-        formData.append('myFile', this.state.selectedFile, this.state.fileName)
-        axios.post('/postsForm', formData, {
-            onUploadProgress: progressEvent => {
-              console.log(progressEvent.loaded / progressEvent.total)
-            }
-        })
+        formData.append('myFile', this.state.selectedFile, this.state.fileName);
+        formData.append('text', JSON.stringify([{title: this.state.title}, {body: this.state.body}]))
+        this.props.createPost(formData);
+        // axios.post('/postFiles', formData, {
+        //     onUploadProgress: progressEvent => {
+        //     console.log(progressEvent.loaded / progressEvent.total == 1)
+        //     }
+        // })
     }
     fileChangedHandler( e ) {
         const file = e.target.files[0];
-        this.setState({ selectedFile: file, fileName: file.name });
+        if(file){
+            this.setState({ selectedFile: file, fileName: file.name });
+        }
     }
 
     activeClass(check) {
@@ -113,7 +118,7 @@ class Postform extends Component {
 
                 <div className="upload">
                     <input type="file" onChange={this.fileChangedHandler.bind(this)} />
-                    {/* <button onClick={this.uploadHandler.bind(this)}>Upload!</button> */}
+                    <button onClick={this.uploadHandler.bind(this)}>Upload!</button>
                 </div>
 
               <button className="ui red long button" type='sumbmit'>Sumbmit</button>
