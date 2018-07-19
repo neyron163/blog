@@ -100,10 +100,10 @@ class Postform extends Component {
                 </div>
 
                 <div className="upload">
-                <div class="ui action input">
-                    <label for="file" className="ui icon button ">
+                <div className="ui action input">
+                    <label htmlFor="file" className="ui icon button ">
                         {/* <i class="file upload icon"></i> */}
-                        <i class="file image icon"></i>
+                        <i className="file image icon"></i>
                         <span>{this.state.fileName}</span>
                         <input type="file" id="file" className="file-input" onChange={this.fileChangedHandler.bind(this)} />
                     </label>
