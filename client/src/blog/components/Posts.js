@@ -14,7 +14,7 @@ class Posts extends Component {
         super(props);
 
         this.state = {
-            activeClass: false,
+            editID: ''
         }
 
         this.onSubmitDelete = this
@@ -43,12 +43,11 @@ class Posts extends Component {
                 .unshift(nextProps.newPost);
         }
     }
-    onClickEdit(e) {
-        // e.target.parentElement.classList.toggle('edit-active');
+    onClickEdit(post) {
+        this.setState({ editID: post._id });
     }
     onSubmitEdit(e) {
         // e.preventDefault();
-        // let ID = {id: 1};
         // this
         // .props
         // .editPost(ID);
@@ -76,17 +75,18 @@ class Posts extends Component {
             });
     }
     render() {
-        const postItems = () => this
-            .props
-            .posts
-            .map((post, i) => {
+        const postItems = () => this.props.posts.map((post, i) => {
+            if(this.state.editID == post._id){
                 return (
                     <div className="flex-article" key={post._id}>
+
                         <div className="left-side">
-                            <h3><Link to={post._id}>{post.title}</Link></h3>
+                            <input />
+                            <input />
+                            {/* <h3><Link to={post._id}>{post.title}</Link></h3>
                             <p>{post.body}</p>
-                            <img src={ '/images/' + post.image} />
-                            <Link to={post._id}>Learn more...</Link>
+                            <img src={ '/images/' + post.image} /> */}
+                            {/* <Link to={post._id}>Learn more...</Link> */}
                         </div>
 
                             <div className="more-container">
@@ -95,7 +95,7 @@ class Posts extends Component {
                                 <div className="popup-container">
                                 <div className="wrapper">
 
-                                            <button type="sumbmit" className="edites">
+                                            <button type="sumbmit" className="edites" onClick={() => this.onClickEdit(post)}>
                                                 <div className="remove">
                                                         <i aria-hidden="true" className="edit icon"></i>
                                                 </div>
@@ -117,6 +117,45 @@ class Posts extends Component {
                             </div>
                     </div>
                 )
+            }else{
+                return (
+                    <div className="flex-article" key={post._id}>
+                        <div className="left-side">
+                            <h3><Link to={post._id}>{post.title}</Link></h3>
+                            <p>{post.body}</p>
+                            <img src={ '/images/' + post.image} />
+                            <Link to={post._id}>Learn more...</Link>
+                        </div>
+
+                            <div className="more-container">
+                                <div className="info">
+                                <i className="ellipsis vertical icon large icon-red"></i>
+                                <div className="popup-container">
+                                <div className="wrapper">
+
+                                            <button type="sumbmit" className="edites" onClick={() => this.onClickEdit(post)}>
+                                                <div className="remove">
+                                                        <i aria-hidden="true" className="edit icon"></i>
+                                                </div>
+                                                <div>Edit Post</div>
+                                            </button>
+
+                                            <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
+                                                <button type="sumbmit" className="delete">
+                                                    <div className="remove">
+                                                            <i aria-hidden="true" className="close icon"></i>
+                                                    </div>
+                                                    <div>Delete Post</div>
+                                                </button>
+                                            </form>
+
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                )
+            }
             });
             const Child = ({match}) => (
                 <div>

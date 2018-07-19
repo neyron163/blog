@@ -9,7 +9,6 @@ import {
     createPost
 } from '../actions/postActions';
 import './postform.css';
-import axios from 'axios';
 
 class Postform extends Component {
     constructor(props) {
@@ -60,7 +59,8 @@ class Postform extends Component {
             classActive: false,
             title: '',
             body: '',
-            selectedFile: {}
+            selectedFile: {},
+            fileName: ''
         });
 
     }
