@@ -17,14 +17,7 @@ export const fetchPosts = () => dispatch => {
 export const createPost = (formData) => dispatch => {
     fetch('/postsForm', {
             method: 'POST',
-            // headers: {
-            //     "Content-Type": "multipart/form-data"
-            // },
             body: formData
-            // headers: {
-            //     "Content-Type": "application/json"
-            // },
-            // body: JSON.stringify(formData)
         })
         .then(res => res.json())
         .then(post => dispatch({
