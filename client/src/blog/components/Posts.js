@@ -56,32 +56,27 @@ class Posts extends Component {
         e.preventDefault();
         this.props.deletePost(post._id);
     }
+    image(img) {
+        if(img){
+            return <img src={'/images/' + img} aria-hidden alt="image"/>
+        }
+    }
     singlePost(sPost) {
-        return this
-            .props
-            .posts
-            .map((post, i) => {
+        return this.props.posts.map( (post, i) => {
                 if (post._id === sPost) {
                     return (
                         <div key={post._id + i}>
                             <h1>{post.title}</h1>
                             <div className="p-inner">{post.body}</div>
-                            <div className="p-inner">{post.body}</div>
-                            <div className="p-inner">{post.body}</div>
-                            <img src={'/images/' + post.image} />
+                            {this.image(post.image)}
                         </div>
                     )
                 }
             });
     }
     render() {
-        const image = (img) => {
-            if(img){
-                return <img src={'/images/' + img}/>
-            }
-        }
         const postItems = () => this.props.posts.map((post, i) => {
-            if(this.state.editID == post._id){
+            if(this.state.editID === post._id){
                 return (
                     <div className="flex-article" key={post._id}>
 
@@ -128,7 +123,7 @@ class Posts extends Component {
                         <div className="left-side">
                             <h3><Link to={post._id}>{post.title}</Link></h3>
                             <p>{post.body}</p>
-                            {image(post.image)}
+                            {this.image(post.image)}
                             <Link to={post._id}>Learn more...</Link>
                         </div>
 
