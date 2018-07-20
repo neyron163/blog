@@ -111,3 +111,9 @@
 .info:hover .icon-red {
     color: #db2828;
 }
+.edit-input{
+    display: none;
+}
+.active-edit{
+    display: block;
+}

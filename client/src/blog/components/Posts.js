@@ -6,6 +6,7 @@ import {fetchPosts, editPost, deletePost} from '../actions/postActions';
 import {history} from '../store';
 import {ConnectedRouter} from "react-router-redux";
 
+import Edit from './edit/Edit';
 import Social from './social/Social';
 import './posts.css';
 
@@ -14,18 +15,15 @@ class Posts extends Component {
         super(props);
 
         this.state = {
-            editID: ''
+            editID: '',
+            title: '',
+            body: ''
         }
 
-        this.onSubmitDelete = this
-            .onSubmitDelete
-            .bind(this);
-        this.onSubmitEdit = this
-            .onSubmitEdit
-            .bind(this);
-        this.onClickEdit = this
-            .onClickEdit
-            .bind(this);
+        this.onSubmitDelete = this.onSubmitDelete.bind(this);
+        this.onSubmitEdit = this.onSubmitEdit.bind(this);
+        this.onChangeEdit = this.onChangeEdit.bind(this);
+        this.onClickEdit = this.onClickEdit.bind(this);
     }
 
     componentWillMount() {
@@ -43,9 +41,28 @@ class Posts extends Component {
                 .unshift(nextProps.newPost);
         }
     }
+    onChangeText(title) {
+        console.log(title)
+        // this.setState({ title: title });
+        // return this.state.title;
+    }
+    onChangeEdit(e) {
+        console.log(e.target.value)
+        // this.setState({ title: e.target.value })
+        // if([e.target.title]){
+        //     this.setState({ title: e.target.value });
+        // }
+        // if([e.target.body]){
+        //     this.setState({ body: e.target.value });
+        // }
+        // this.setState({
+        //     [e.target.name]: e.target.value
+        // });
+    }
     onClickEdit(post) {
         this.setState({ editID: post._id });
     }
+
     onSubmitEdit(e) {
         // e.preventDefault();
         // this
@@ -75,87 +92,55 @@ class Posts extends Component {
             });
     }
     render() {
-        const postItems = () => this.props.posts.map((post, i) => {
-            if(this.state.editID === post._id){
+        const toggle = (post) => {
+            if(post._id !== this.state.editID){
                 return (
-                    <div className="flex-article" key={post._id}>
-
-                        <div className="left-side">
-                            <input />
-                            <input />
-                            {/* <h3><Link to={post._id}>{post.title}</Link></h3>
-                            <p>{post.body}</p>
-                            <img src={ '/images/' + post.image} /> */}
-                            {/* <Link to={post._id}>Learn more...</Link> */}
-                        </div>
-
-                            <div className="more-container">
-                                <div className="info">
-                                <i className="ellipsis vertical icon large icon-red"></i>
-                                <div className="popup-container">
-                                <div className="wrapper">
-
-                                            <button type="sumbmit" className="edites" onClick={() => this.onClickEdit(post)}>
-                                                <div className="remove">
-                                                        <i aria-hidden="true" className="edit icon"></i>
-                                                </div>
-                                                <div>Edit Post</div>
-                                            </button>
-
-                                            <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
-                                                <button type="sumbmit" className="delete">
-                                                    <div className="remove">
-                                                            <i aria-hidden="true" className="close icon"></i>
-                                                    </div>
-                                                    <div>Delete Post</div>
-                                                </button>
-                                            </form>
-
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                    </div>
-                )
-            }else{
-                return (
-                    <div className="flex-article" key={post._id}>
-                        <div className="left-side">
-                            <h3><Link to={post._id}>{post.title}</Link></h3>
-                            <p>{post.body}</p>
-                            {this.image(post.image)}
-                            <Link to={post._id}>Learn more...</Link>
-                        </div>
-
-                            <div className="more-container">
-                                <div className="info">
-                                <i className="ellipsis vertical icon large icon-red"></i>
-                                <div className="popup-container">
-                                <div className="wrapper">
-
-                                            <button type="sumbmit" className="edites" onClick={() => this.onClickEdit(post)}>
-                                                <div className="remove">
-                                                        <i aria-hidden="true" className="edit icon"></i>
-                                                </div>
-                                                <div>Edit Post</div>
-                                            </button>
-
-                                            <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
-                                                <button type="sumbmit" className="delete">
-                                                    <div className="remove">
-                                                            <i aria-hidden="true" className="close icon"></i>
-                                                    </div>
-                                                    <div>Delete Post</div>
-                                                </button>
-                                            </form>
-
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
+                    <div>
+                        <h3><Link to={post._id}>{post.title}</Link></h3>
+                        <p>{post.body}</p>
+                        {this.image(post.image)}
+                        <Link to={post._id}>Learn more...</Link>
                     </div>
                 )
             }
+        }
+        const postItems = () => this.props.posts.map((post, i) => {
+                return (
+                    <div className="flex-article" key={post._id}>
+                        <div className="left-side">
+
+                            {toggle(post)}
+                            <Edit check={post._id === this.state.editID}/>
+                        </div>
+
+                            <div className="more-container">
+                                <div className="info">
+                                <i className="ellipsis vertical icon large icon-red"></i>
+                                <div className="popup-container">
+                                <div className="wrapper">
+
+                                            <button type="sumbmit" className="edites" onClick={() => this.onClickEdit(post)}>
+                                                <div className="remove">
+                                                        <i aria-hidden="true" className="edit icon"></i>
+                                                </div>
+                                                <div>Edit Post</div>
+                                            </button>
+
+                                            <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
+                                                <button type="sumbmit" className="delete">
+                                                    <div className="remove">
+                                                            <i aria-hidden="true" className="close icon"></i>
+                                                    </div>
+                                                    <div>Delete Post</div>
+                                                </button>
+                                            </form>
+
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                )
             });
             const Child = ({match}) => (
                 <div>

@@ -18,8 +18,7 @@ class Postform extends Component {
             body: '',
             selectedFile: {},
             fileName: '',
-            classActive: false,
-            fileLength: undefined
+            classActive: false
         };
 
         this.onChange = this.onChange.bind(this);
@@ -50,13 +49,9 @@ class Postform extends Component {
         e.preventDefault();
         
         const formData = new FormData();
+        formData.append('myFile', this.state.selectedFile, this.state.fileName);
+        formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]));
 
-        if(this.state.fileLength){
-            formData.append('myFile', this.state.selectedFile, this.state.fileName);
-            formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]));
-        }else{
-            formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body}]));
-        }
 
 
         this.props.createPost(formData);
