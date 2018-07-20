@@ -1,33 +1,50 @@
 @keyframes anim {
-    0% { transform: translateX(-1%) }
-    25% { transform: translateX(1%) }
-    50% { transform: translateX(-2%) }
-    75% { transform: translateX(2%) }
-    100% { transform: translateX(0%) }
+    0% {
+        transform: translateX(-1%)
+    }
+    25% {
+        transform: translateX(1%)
+    }
+    50% {
+        transform: translateX(-2%)
+    }
+    75% {
+        transform: translateX(2%)
+    }
+    100% {
+        transform: translateX(0%)
+    }
 }
 
-.top-side{
+.top-side {
     margin-bottom: 45px;
     margin-top: 105px;
 }
+
 .top-side h1 {
     text-align: center;
 }
-.field{
+
+.field {
     margin-top: 20px;
 }
-.long{
+
+.long {
     width: 100%;
 }
-.filed-form{
+
+.filed-form {
     margin-top: 20px;
 }
-.button{
- margin: 0 auto;
+
+.button {
+    margin: 0 auto;
 }
-.error{
+
+.error {
     animation: anim 0.4s ease-in-out;
 }
-.file-input{
+
+.file-input {
     display: none;
 }

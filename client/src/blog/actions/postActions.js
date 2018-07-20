@@ -32,7 +32,10 @@ export const editPost = (postID, postEditor) => dispatch => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ ID: postID, postEditor: postEditor})
+            body: JSON.stringify({
+                ID: postID,
+                postEditor: postEditor
+            })
         })
         .then(res => res.json())
         .then(post => dispatch({
@@ -47,7 +50,9 @@ export const deletePost = (postID) => dispatch => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ ID: postID})
+            body: JSON.stringify({
+                ID: postID
+            })
         })
         .then(res => res.json())
         .then(post => dispatch({

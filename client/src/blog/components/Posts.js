@@ -75,6 +75,11 @@ class Posts extends Component {
             });
     }
     render() {
+        const image = (img) => {
+            if(img){
+                return <img src={'/images/' + img}/>
+            }
+        }
         const postItems = () => this.props.posts.map((post, i) => {
             if(this.state.editID == post._id){
                 return (
@@ -123,7 +128,7 @@ class Posts extends Component {
                         <div className="left-side">
                             <h3><Link to={post._id}>{post.title}</Link></h3>
                             <p>{post.body}</p>
-                            <img src={ '/images/' + post.image} />
+                            {image(post.image)}
                             <Link to={post._id}>Learn more...</Link>
                         </div>
 

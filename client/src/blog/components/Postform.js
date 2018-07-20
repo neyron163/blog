@@ -18,7 +18,8 @@ class Postform extends Component {
             body: '',
             selectedFile: {},
             fileName: '',
-            classActive: false
+            classActive: false,
+            fileLength: undefined
         };
 
         this.onChange = this.onChange.bind(this);
@@ -49,8 +50,14 @@ class Postform extends Component {
         e.preventDefault();
         
         const formData = new FormData();
-        formData.append('myFile', this.state.selectedFile, this.state.fileName);
-        formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]))
+
+        if(this.state.fileLength){
+            formData.append('myFile', this.state.selectedFile, this.state.fileName);
+            formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]));
+        }else{
+            formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body}]));
+        }
+
 
         this.props.createPost(formData);
         
@@ -68,21 +75,8 @@ class Postform extends Component {
         const file = e.target.files[0];
         if(file){
             this.setState({ selectedFile: file, fileName: file.name });
-        }
-    }
-
-    activeClass(check) {
-        if(check){
-            if (this.state.classActive) {
-                return "ui long error input";
-            }
-                return "ui long input";
         }else{
-            if (this.state.classActive) {
-                return "filed-form error";
-            } else {
-                return "filed-form";
-            }
+            this.setState({ fileLength: file })
         }
     }
     render() {
@@ -91,11 +85,11 @@ class Postform extends Component {
             <h1>Enter your post</h1>
             <form onSubmit={this.onSubmit} className="ui form">
   
-                <div className={this.activeClass(true)}>
+                <div className={ this.state.classActive ? "ui long error input" : "ui long input"}>
                   <input type="text" placeholder="Your title" name="title" onChange={this.onChange} value={this.state.title} />
                 </div>
   
-                <div className={this.activeClass(false)}>
+                <div className={this.state.classActive ? "filed-form error" : "filed-form"}>
                   <textarea name="body" rows="6" placeholder="Your description" value={this.state.body} onChange={this.onChange} />
                 </div>
 
