@@ -17,7 +17,6 @@ class Edit extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onClick = this.onClick.bind(this);
     }
     onPaste(e) {
         console.log(e.clipboardData.getData('text'))
@@ -27,15 +26,19 @@ class Edit extends Component {
             [e.target.name]: e.target.value
         });
      }
-    onClick() {
-        // this.setState({
-        //     toggle: false
-        // })
+    image(img) {
+        if(img){
+            return <img src={'/images/' + img} aria-hidden alt="image"/>
+        }
     }
     onSubmit(e){
         e.preventDefault();
 
         this.props.editPost(this.props.id, this.state.title, this.state.body);
+
+        this.setState({
+            toggle: false
+        })
     }
     render() {
         if(this.props.check && this.state.toggle){
@@ -52,7 +55,11 @@ class Edit extends Component {
             );
         }else{
             return (
-                <div> </div>
+                <div>
+                    <h3>{this.props.h3}</h3>
+                    <p>{this.props.body}</p>
+                    {this.image(this.props.image)}
+                </div>
             )
         }
     }

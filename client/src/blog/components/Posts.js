@@ -76,7 +76,7 @@ class Posts extends Component {
     }
     render() {
         const toggle = (post) => {
-            if(post._id !== this.state.editID){
+            // if(post._id !== this.state.editID){
                 return (
                     <div>
                         <h3><Link to={post._id}>{post.title}</Link></h3>
@@ -85,15 +85,15 @@ class Posts extends Component {
                         <Link to={post._id}>Learn more...</Link>
                     </div>
                 )
-            }
+            // }
         }
         const postItems = () => this.props.posts.map((post, i) => {
                 return (
                     <div className="flex-article" key={post._id}>
                         <div className="left-side">
 
-                            {toggle(post)}
-                            <Edit title={this.postSend(post, 'title')} body={this.postSend(post, 'body')} id={this.state.editID} check={post._id === this.state.editID}/>
+                            {/* {toggle(post)} */}
+                            <Edit h3={post.title} body={post.body} image={post.image} id={this.state.editID} check={post._id === this.state.editID}/>
                         </div>
 
                             <div className="more-container">
