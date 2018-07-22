@@ -21,8 +21,6 @@ class Posts extends Component {
         }
 
         this.onSubmitDelete = this.onSubmitDelete.bind(this);
-        this.onSubmitEdit = this.onSubmitEdit.bind(this);
-        this.onChangeEdit = this.onChangeEdit.bind(this);
         this.onClickEdit = this.onClickEdit.bind(this);
     }
 
@@ -41,37 +39,22 @@ class Posts extends Component {
                 .unshift(nextProps.newPost);
         }
     }
-    onChangeText(title) {
-        console.log(title)
-        // this.setState({ title: title });
-        // return this.state.title;
-    }
-    onChangeEdit(e) {
-        console.log(e.target.value)
-        // this.setState({ title: e.target.value })
-        // if([e.target.title]){
-        //     this.setState({ title: e.target.value });
-        // }
-        // if([e.target.body]){
-        //     this.setState({ body: e.target.value });
-        // }
-        // this.setState({
-        //     [e.target.name]: e.target.value
-        // });
-    }
     onClickEdit(post) {
         this.setState({ editID: post._id });
-    }
-
-    onSubmitEdit(e) {
-        // e.preventDefault();
-        // this
-        // .props
-        // .editPost(ID);
     }
     onSubmitDelete(e, post) {
         e.preventDefault();
         this.props.deletePost(post._id);
+    }
+    postSend(post, check) {
+        if(post._id === this.state.editID){
+            if(check === 'title'){
+                return post.title;
+            }
+            if(check === 'body'){
+                return post.body;
+            }
+        }
     }
     image(img) {
         if(img){
@@ -110,7 +93,7 @@ class Posts extends Component {
                         <div className="left-side">
 
                             {toggle(post)}
-                            <Edit check={post._id === this.state.editID}/>
+                            <Edit title={this.postSend(post, 'title')} body={this.postSend(post, 'body')} id={this.state.editID} check={post._id === this.state.editID}/>
                         </div>
 
                             <div className="more-container">

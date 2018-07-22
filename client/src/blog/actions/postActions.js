@@ -26,7 +26,7 @@ export const createPost = (formData) => dispatch => {
         }));
 };
 
-export const editPost = (postID, postEditor) => dispatch => {
+export const editPost = (postID, ...postEditor) => dispatch => {
     fetch('/postsEdit', {
             method: 'POST',
             headers: {
