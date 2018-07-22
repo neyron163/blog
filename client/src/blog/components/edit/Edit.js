@@ -11,11 +11,13 @@ class Edit extends Component {
         super(props);
         this.state = {
             title: '',
-            body: ''
+            body: '',
+            toggle: true
         }
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
     onPaste(e) {
         console.log(e.clipboardData.getData('text'))
@@ -25,15 +27,20 @@ class Edit extends Component {
             [e.target.name]: e.target.value
         });
      }
+    onClick() {
+        // this.setState({
+        //     toggle: false
+        // })
+    }
     onSubmit(e){
         e.preventDefault();
 
         this.props.editPost(this.props.id, this.state.title, this.state.body);
     }
     render() {
-        if(this.props.check){
+        if(this.props.check && this.state.toggle){
             return (
-                <form className="edit-ui" onSubmit={this.onSubmit}>
+                <form className="ui form" onSubmit={this.onSubmit}>
                     <div className="ui long input">
                         <input type="text" name="title" onChange={this.onChange} value={this.state.title}/>
                     </div>

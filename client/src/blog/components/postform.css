@@ -48,3 +48,14 @@
 .file-input {
     display: none;
 }
+label{
+    border-radius: 5px!important;
+}
+label span{
+    margin-left: 10px;
+}
+.upload{
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}

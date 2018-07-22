@@ -11,6 +11,7 @@
 .flex-article .left-side {
     margin-right: 20px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .flex-article:last-child .left-side {

@@ -10,20 +10,6 @@ router.post('/', (req, res) => {
             res.json(articles.reverse());
         });
     });
-    // let ID = req.body.ID;
-    // ArticleModel.findByIdAndUpdate( ID, { popupEditor: req.body.postEditor}, (err, art) => {
-    //     if(err){
-    //         console.error(err);
-    //     }
-    // }).then(() => {
-    //     ArticleModel.find((err, articles) => {
-    //         res.json(articles.reverse());
-    //     });
-    //     // ArticleModel.findById( ID, (err, art) => {
-    //     //     console.log(art)
-    //     //     res.json(art);
-    //     // });
-    // });
 });
 
 
