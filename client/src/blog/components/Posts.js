@@ -17,7 +17,8 @@ class Posts extends Component {
         this.state = {
             editID: '',
             title: '',
-            body: ''
+            body: '',
+            test: false
         }
 
         this.onSubmitDelete = this.onSubmitDelete.bind(this);
@@ -65,7 +66,7 @@ class Posts extends Component {
         return this.props.posts.map( (post, i) => {
                 if (post._id === sPost) {
                     return (
-                        <div key={post._id + i}>
+                        <div key={post._id + i} className="single-post">
                             <h1>{post.title}</h1>
                             <div className="p-inner">{post.body}</div>
                             {this.image(post.image)}
@@ -75,25 +76,11 @@ class Posts extends Component {
             });
     }
     render() {
-        const toggle = (post) => {
-            // if(post._id !== this.state.editID){
-                return (
-                    <div>
-                        <h3><Link to={post._id}>{post.title}</Link></h3>
-                        <p>{post.body}</p>
-                        {this.image(post.image)}
-                        <Link to={post._id}>Learn more...</Link>
-                    </div>
-                )
-            // }
-        }
         const postItems = () => this.props.posts.map((post, i) => {
                 return (
                     <div className="flex-article" key={post._id}>
                         <div className="left-side">
-
-                            {/* {toggle(post)} */}
-                            <Edit h3={post.title} body={post.body} image={post.image} id={this.state.editID} check={post._id === this.state.editID}/>
+                            <Edit title={post.title} body={post.body} image={post.image} post={post._id} id={this.state.editID} check={post._id === this.state.editID}/>
                         </div>
 
                             <div className="more-container">

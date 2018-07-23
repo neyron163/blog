@@ -4,22 +4,32 @@ import {
     connect
 } from 'react-redux';
 import { editPost } from '../../actions/postActions';
+import './edit.css';
 
+import {Link} from "react-router-dom";
 
 class Edit extends Component {
     constructor(props){
         super(props);
         this.state = {
-            title: '',
-            body: '',
+            title: this.props.title,
+            body: this.props.body,
             toggle: true
         }
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
-    onPaste(e) {
-        console.log(e.clipboardData.getData('text'))
+    componentDidMount() {
+        if(this.getHeight){
+            if(this.getHeight.clientHeight > 60) {
+                this.getHeight.style.height = 60 + 'px';
+            }
+        }
+    }
+    onClick() {
+        this.setState({ toggle: false });
     }
     onChange(e){
         this.setState({
@@ -35,15 +45,13 @@ class Edit extends Component {
         e.preventDefault();
 
         this.props.editPost(this.props.id, this.state.title, this.state.body);
-
-        this.setState({
-            toggle: false
-        })
     }
     render() {
+        console.log(this.props.check)
         if(this.props.check && this.state.toggle){
             return (
-                <form className="ui form" onSubmit={this.onSubmit}>
+                <div>
+                <form className="ui form edit-form" onSubmit={this.onSubmit}>
                     <div className="ui long input">
                         <input type="text" name="title" onChange={this.onChange} value={this.state.title}/>
                     </div>
@@ -52,12 +60,15 @@ class Edit extends Component {
                     </div>
                     <button className="ui green long button" type="sumbmit">Save</button>
                 </form>
+                <button className="ui red long button" onClick={this.onClick}>Close</button>
+                </div>
             );
         }else{
             return (
                 <div>
-                    <h3>{this.props.h3}</h3>
-                    <p>{this.props.body}</p>
+                    <h3>{this.props.title}</h3>
+                    <p ref={(node) => {this.getHeight = node}}>{this.props.body}</p>
+                    <Link to={this.props.post}>Learn more...</Link>
                     {this.image(this.props.image)}
                 </div>
             )

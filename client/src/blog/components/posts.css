@@ -87,10 +87,16 @@
     color: #db2828;
 }
 
-.flex-article .left-side h3 a {
+.flex-article .left-side h3 {
     color: #db2828;
 }
-
+.flex-article .left-side p {
+    margin-bottom: 0;
+    overflow: hidden;
+}
+.flex-article .left-side img{
+    margin-top: 10px;
+}
 .p-inner {
     margin-bottom: 25px;
 }
@@ -117,4 +123,7 @@
 }
 .active-edit{
     display: block;
+}
+.single-post img{
+    margin-bottom: 25px;
 }
