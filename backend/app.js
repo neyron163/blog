@@ -7,7 +7,6 @@ import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
 // import favicon from 'serve-favicon';
 
-import index from './routes/index';
 import posts from './routes/post';
 import postForm from './routes/postForm';
 import postDel from './routes/postDel';
@@ -51,7 +50,6 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', index);
 app.use('/posts', posts);
 app.use('/postsForm', postForm);
 app.use('/postsEdit', postEdit);
