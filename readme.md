@@ -1,1 +1,1 @@
-![alt text](https://github.com/neyron163/blog/blog.png)
+![alt text](https://github.com/neyron163/blog/blob/master/blog.png)
