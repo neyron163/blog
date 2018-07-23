@@ -59,7 +59,7 @@ class Posts extends Component {
     }
     image(img) {
         if(img){
-            return <img src={'/images/' + img} aria-hidden alt="image"/>
+            return <img src={'/api/images/' + img} aria-hidden alt="image"/>
         }
     }
     singlePost(sPost) {

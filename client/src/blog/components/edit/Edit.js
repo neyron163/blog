@@ -38,7 +38,7 @@ class Edit extends Component {
      }
     image(img) {
         if(img){
-            return <img src={'/images/' + img} aria-hidden alt="image"/>
+            return <img src={'/api/images/' + img} aria-hidden alt="image"/>
         }
     }
     onSubmit(e){
@@ -47,7 +47,6 @@ class Edit extends Component {
         this.props.editPost(this.props.id, this.state.title, this.state.body);
     }
     render() {
-        console.log(this.props.check)
         if(this.props.check && this.state.toggle){
             return (
                 <div>
