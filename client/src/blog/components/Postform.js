@@ -18,7 +18,8 @@ class Postform extends Component {
             body: '',
             selectedFile: {},
             fileName: '',
-            classActive: false
+            classActive: false,
+            fileError: ''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -68,11 +69,16 @@ class Postform extends Component {
     }
     fileChangedHandler( e ) {
         const file = e.target.files[0];
-        if(file){
-            this.setState({ selectedFile: file, fileName: file.name });
-        }else{
-            this.setState({ fileLength: file })
-        }
+        const types = ['image/jpeg', 'image/jpg', 'image/png'];
+            if(file){
+                if(file.type === types[0]){
+                    this.setState({ selectedFile: file, fileName: file.name, fileError: '' });
+                }else{
+                    this.setState({ fileError: 'You are cannot upload ' + file.type + ', only image jpeg' });
+                }
+            }else {
+                this.setState({ fileLength: file, fileError: 'You are canceled' })
+            }
     }
     render() {
         return (
@@ -88,15 +94,16 @@ class Postform extends Component {
                   <textarea name="body" rows="6" placeholder="Your description" value={this.state.body} onChange={this.onChange} />
                 </div>
 
-                <div className="upload">
-                <div className="ui action input">
-                    <label htmlFor="file" className="ui icon button ">
-                        {/* <i class="file upload icon"></i> */}
-                        <i className="file image icon"></i>
-                        <span>{this.state.fileName}</span>
+                <div className="upload-container">
+                {/* <div className="ui action input"> */}
+                    <label htmlFor="file">
+                        <i className="cloud upload massive icon"></i>
+                        <span>Choose a file</span>
+                        <span className="file-name">{this.state.fileName}</span>
+                        <span className="file-error">{this.state.fileError}</span>
                         <input type="file" id="file" className="file-input" onChange={this.fileChangedHandler.bind(this)} />
                     </label>
-                    </div>
+                    {/* </div> */}
                 </div>
 
               <button className="ui red long button" type='sumbmit'>Sumbmit</button>
