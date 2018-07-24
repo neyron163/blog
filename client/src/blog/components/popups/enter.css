@@ -1,0 +1,38 @@
+.enter .enter-container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 600px;
+    height: 400px;
+    background: url(./bg.jpg);
+    background-size: cover; 
+    border-radius: 6px;
+}
+.enter .enter-container::after{
+    content: '';
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+    border-radius: 6px;
+}
+.enter .enter-close{
+    display: inline-block;
+    cursor: pointer;
+}
+.enter .enter-close .close{
+    transform: scale(0.8);
+    transition: transform 0.4s;
+}
+.enter .enter-close:hover .close{
+    transform: scale(1);
+}
+.enter .enter-container form{
+    max-width: 300px;
+    margin: 0 auto;
+}
