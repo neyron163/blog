@@ -5,17 +5,24 @@ class Enter extends Component {
         super(props);
 
         this.state = {
-            popup: false
+            popup: false,
+            login: '',
+            password: ''
         }
 
         this.onClickOpen = this.onClickOpen.bind(this);
         this.onClickClose = this.onClickClose.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
-    // componentWillMount() {
-    //     if(this.state.popup){
-    //         document.body.classList.add('enter-popup');
-    //     }
-    // }
+    onChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+    onSubmit() {
+
+    }
     onClickOpen() {
         this.setState({ popup: true });
         document.body.classList.add('enter-popup-active');
@@ -30,12 +37,12 @@ class Enter extends Component {
                 return (
                     <div className={this.state.popup ? "enter-container active" : "enter-container"}>
                         <div onClick={this.onClickClose} className="enter-close"><i className="close small inverted icon"></i></div>
-                        <form className="ui form">
+                        <form className="ui form" onSubmit={this.onSubmit}>
                         <div className="ui long input">
-                            <input placeholder="Your login" type="text"/>
+                            <input placeholder="Your login" type="text" name="login" onChange={this.onChange} value={this.state.login}/>
                         </div>
                         <div className="ui long input">
-                            <input placeholder="Your password" type="password"/>
+                            <input placeholder="Your password" type="password" name="password" onChange={this.onChange} value={this.state.password}/>
                         </div>
                             <button className="ui inverted green button">send</button>
                         </form>
