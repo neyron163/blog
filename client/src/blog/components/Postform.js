@@ -24,8 +24,6 @@ class Postform extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        // this.uploadHandler = this.uploadHandler(this);
-        // this.fileChangedHandler = this.fileChangedHandler(this);
     }
     onChange(e) {
         this.setState({
@@ -95,7 +93,6 @@ class Postform extends Component {
                 </div>
 
                 <div className="upload-container">
-                {/* <div className="ui action input"> */}
                     <label htmlFor="file">
                         <i className="cloud upload massive icon"></i>
                         <span>Choose a file</span>
@@ -103,7 +100,6 @@ class Postform extends Component {
                         <span className="file-error">{this.state.fileError}</span>
                         <input type="file" id="file" className="file-input" onChange={this.fileChangedHandler.bind(this)} />
                     </label>
-                    {/* </div> */}
                 </div>
 
               <button className="ui red long button" type='sumbmit'>Sumbmit</button>

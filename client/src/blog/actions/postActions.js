@@ -6,7 +6,7 @@ import {
 } from './types';
 
 export const fetchPosts = () => dispatch => {
-    fetch('/api/posts')
+    fetch('/posts')
         .then(res => res.json())
         .then(posts => dispatch({
             type: FETCH_POSTS,
@@ -15,7 +15,7 @@ export const fetchPosts = () => dispatch => {
 };
 
 export const createPost = (formData) => dispatch => {
-    fetch('/api/postsForm', {
+    fetch('/postsForm', {
             method: 'POST',
             body: formData
         })
@@ -27,7 +27,7 @@ export const createPost = (formData) => dispatch => {
 };
 
 export const editPost = (postID, ...postEditor) => dispatch => {
-    fetch('/api/postsEdit', {
+    fetch('/postsEdit', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -45,7 +45,7 @@ export const editPost = (postID, ...postEditor) => dispatch => {
 };
 
 export const deletePost = (postID) => dispatch => {
-    fetch('/api/postsDel', {
+    fetch('/postsDel', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

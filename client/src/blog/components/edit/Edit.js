@@ -38,7 +38,7 @@ class Edit extends Component {
      }
     image(img) {
         if(img){
-            return <img src={'/api/images/' + img} aria-hidden alt="image"/>
+            return <img src={'/images/' + img} aria-hidden alt="image"/>
         }
     }
     onSubmit(e){

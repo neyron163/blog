@@ -59,7 +59,7 @@ class Posts extends Component {
     }
     image(img) {
         if(img){
-            return <img src={'/api/images/' + img} aria-hidden alt="image"/>
+            return <img src={'/images/' + img} aria-hidden alt="image"/>
         }
     }
     singlePost(sPost) {
@@ -93,7 +93,7 @@ class Posts extends Component {
                                                 <div className="remove">
                                                         <i aria-hidden="true" className="edit icon"></i>
                                                 </div>
-                                                <div>Edit Post</div>
+                                                <div className="mobile-hide">Edit Post</div>
                                             </button>
 
                                             <form onSubmit={(e) => this.onSubmitDelete(e, post)}>
@@ -101,7 +101,7 @@ class Posts extends Component {
                                                     <div className="remove">
                                                             <i aria-hidden="true" className="close icon"></i>
                                                     </div>
-                                                    <div>Delete Post</div>
+                                                    <div className="mobile-hide">Delete Post</div>
                                                 </button>
                                             </form>
 

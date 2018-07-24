@@ -1,19 +1,9 @@
 @keyframes anim {
-    0% {
-        transform: translateX(-1%)
-    }
-    25% {
-        transform: translateX(1%)
-    }
-    50% {
-        transform: translateX(-2%)
-    }
-    75% {
-        transform: translateX(2%)
-    }
-    100% {
-        transform: translateX(0%)
-    }
+    0% {transform: translateX(-1%)}
+    25% {transform: translateX(1%)}
+    50% {transform: translateX(-2%)}
+    75% {transform: translateX(2%)}
+    100% {transform: translateX(0%)}
 }
 
 .top-side {
@@ -48,18 +38,6 @@
 .file-input {
     display: none;
 }
-/* label{
-    border-radius: 5px!important;
-}
-label span{
-    margin-left: 10px;
-} */
-/* .upload{
-    margin: 10px 0;
-    display: flex;
-    justify-content: center;
-} */
-
 .upload-container{
     background: rgba(191, 207, 231, 0.5);
     height: 300px;
@@ -89,4 +67,15 @@ label .file-name{
 }
 label .file-error{
     color: #db2828;
+}
+@media only screen and (max-width: 1200px) {
+    .top-side{
+        margin-top: 55px;
+    }
+    .upload-container{
+        height: 100px;
+    }
+    .upload-container label .massive{
+        font-size: 2em!important;
+    }
 }

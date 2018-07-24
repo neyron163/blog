@@ -12,6 +12,7 @@
     margin-right: 20px;
     margin-bottom: 20px;
     width: 100%;
+    max-width: 800px;
 }
 
 .flex-article:last-child .left-side {
@@ -56,8 +57,6 @@
 
 .flex-article .popup-container .wrapper {
     display: none;
-    /* transform: translateY(-200%); */
-    /* transition: all 2s ease-in-out; */
     margin: 5px;
     box-shadow: 0px 1px 5px 1px rgba(168, 168, 168, 0.7);
     border-radius: 5px;
@@ -106,9 +105,7 @@
 }
 
 .info:hover .popup-container .wrapper {
-    /* transform: translateY(0); */
     display: block;
-    /* opacity: 1; */
 }
 
 .icon-red {
@@ -126,4 +123,14 @@
 }
 .single-post img{
     margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .mobile-hide{
+        display: none;
+    }
+    .more-container .popup-container{
+        top: 25px;
+        right: -10px;
+    }
 }
