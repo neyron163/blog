@@ -12,27 +12,32 @@ import Header from './components/header/Header';
 import Posts from './components/Posts';
 import PostForm from './components/Postform';
 import { Dropdown, Menu } from 'semantic-ui-react'
+import { loadState, saveState } from './localStorage';
 
 class Blog extends Component {
     constructor(props){
         super(props);
         this.state = {
-            test: false
+            res: false
         } 
-        store.subscribe(() => {
-            this.setState({ test: store.getState().enter.response })
-            localStorage.setItem("test", this.state.test);
-            console.log(localStorage)
-          });
     }
     render() {
-        if(this.state.test){
+        store.subscribe(() => {
+            let te;
+            if(store.getState().enter.response){
+                te = true;
+            }
+            saveState(te)
+            // this.setState({ res: loadState() })
+            console.log(loadState())
+          });
+        if(this.state.res){
             return (
                 <Provider store={store}>
                         <div className="content">
                             <Header />
                             <PostForm />
-                            <Posts getValueEdit={this.state.test} />
+                            <Posts getValueEdit={this.state.res} />
                         </div>
                 </Provider>
             );
