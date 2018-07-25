@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {postUser} from '../../actions/postActions';
+import PropTypes from 'prop-types';
+
 import './enter.css';
 class Enter extends Component {
     constructor(props){
@@ -20,8 +24,17 @@ class Enter extends Component {
             [e.target.name]: e.target.value
         });
     }
-    onSubmit() {
+    onSubmit(e) {
+        e.preventDefault();
+        console.log('login: ' + this.state.login)
+        console.log('password: ' + this.state.password)
+        const user = [{
+            'login': this.state.login,
+            'password': this.state.password
+         }
+        ]
 
+        this.props.postUser(user);
     }
     onClickOpen() {
         this.setState({ popup: true });
@@ -58,5 +71,12 @@ class Enter extends Component {
         );
     }
 }
+Enter.propTypes = {
+    postUser: PropTypes.func.isRequired,
+};
 
-export default Enter;
+const mapStateToProps = state => ({
+    response: state.posts.items
+});
+
+export default connect(mapStateToProps, {postUser})(Enter);

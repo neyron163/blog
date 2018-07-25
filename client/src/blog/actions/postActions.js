@@ -2,7 +2,8 @@ import {
     FETCH_POSTS,
     NEW_POST,
     EDIT_POST,
-    DEL_POST
+    DEL_POST,
+    POST_USER
 } from './types';
 
 export const fetchPosts = () => dispatch => {
@@ -13,6 +14,22 @@ export const fetchPosts = () => dispatch => {
             payload: posts
         }));
 };
+
+export const postUser = (user) => dispatch => {
+    fetch('/postUser', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    // .then(resJson => console.log(resJson))
+    .then(response => dispatch({
+        type: POST_USER,
+        payload: response
+    }));
+}
 
 export const createPost = (formData) => dispatch => {
     fetch('/postsForm', {

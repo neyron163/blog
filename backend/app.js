@@ -11,6 +11,7 @@ import posts from './routes/post';
 import postForm from './routes/postForm';
 import postDel from './routes/postDel';
 import postEdit from './routes/postEdit';
+import postUser from './routes/postUser';
 import singelPost from './routes/singelPost';
 import mongoose from 'mongoose';
 
@@ -54,6 +55,7 @@ app.use('/posts', posts);
 app.use('/postsForm', postForm);
 app.use('/postsEdit', postEdit);
 app.use('/postsDel', postDel);
+app.use('/postUser', postUser);
 app.use('/', singelPost);
 
 

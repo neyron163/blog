@@ -2,7 +2,8 @@ import {
     FETCH_POSTS,
     NEW_POST,
     DEL_POST,
-    EDIT_POST
+    EDIT_POST,
+    POST_USER
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +17,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 items: action.payload
+            }
+        case POST_USER:
+            return {
+                ...state,
+                response: action.payload 
             }
         case NEW_POST:
             return {
