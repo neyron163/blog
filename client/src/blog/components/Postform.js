@@ -79,6 +79,7 @@ class Postform extends Component {
             }
     }
     render() {
+        console.log(this.props.getValue)
         return (
             <div className="top-side">
             <h1>Enter your post</h1>

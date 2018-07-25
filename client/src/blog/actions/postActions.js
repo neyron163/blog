@@ -6,6 +6,7 @@ import {
     POST_USER
 } from './types';
 
+
 export const fetchPosts = () => dispatch => {
     fetch('/posts')
         .then(res => res.json())

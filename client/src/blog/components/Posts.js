@@ -77,6 +77,7 @@ class Posts extends Component {
     }
     render() {
         const postItems = () => this.props.posts.map((post, i) => {
+            if(this.props.getValueEdit){
                 return (
                     <div className="flex-article" key={post._id}>
                         <div className="left-side">
@@ -111,6 +112,15 @@ class Posts extends Component {
                             </div>
                     </div>
                 )
+            }else{
+                return (
+                    <div className="flex-article" key={post._id}>
+                        <div className="left-side">
+                            <Edit title={post.title} body={post.body} image={post.image} post={post._id} id={this.state.editID} check={post._id === this.state.editID}/>
+                        </div>
+                    </div>
+                )
+            }
             });
             const Child = ({match}) => (
                 <div>
