@@ -46,15 +46,19 @@ class Postform extends Component {
         }
 
         e.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('myFile', this.state.selectedFile, this.state.fileName);
-        formData.append('text', JSON.stringify([{title: this.state.title, body: this.state.body, image: this.state.fileName}]));
+        formData.append('text', JSON.stringify([{
+            title: this.state.title,
+            body: this.state.body,
+            image: this.state.fileName
+        }]));
 
 
 
         this.props.createPost(formData);
-        
+
 
         this.setState({
             classActive: false,
@@ -65,48 +69,60 @@ class Postform extends Component {
         });
 
     }
-    fileChangedHandler( e ) {
+    fileChangedHandler(e) {
         const file = e.target.files[0];
         const types = ['image/jpeg', 'image/jpg', 'image/png'];
-            if(file){
-                if(file.type === types[0]){
-                    this.setState({ selectedFile: file, fileName: file.name, fileError: '' });
-                }else{
-                    this.setState({ fileError: 'You are cannot upload ' + file.type + ', only image jpeg' });
-                }
-            }else {
-                this.setState({ fileLength: file, fileError: 'You are canceled' })
+        if (file) {
+            if (file.type === types[0]) {
+                this.setState({
+                    selectedFile: file,
+                    fileName: file.name,
+                    fileError: ''
+                });
+            } else {
+                this.setState({
+                    fileError: 'You are cannot upload ' + file.type + ', only image jpeg'
+                });
             }
+        } else {
+            this.setState({
+                fileLength: file,
+                fileError: 'You are canceled'
+            })
+        }
     }
     render() {
-        console.log(this.props.getValue)
-        return (
-            <div className="top-side">
-            <h1>Enter your post</h1>
-            <form onSubmit={this.onSubmit} className="ui form">
-  
-                <div className={ this.state.classActive ? "ui long error input" : "ui long input"}>
-                  <input type="text" placeholder="Your title" name="title" onChange={this.onChange} value={this.state.title} />
-                </div>
-  
-                <div className={this.state.classActive ? "filed-form error" : "filed-form"}>
-                  <textarea name="body" rows="6" placeholder="Your description" value={this.state.body} onChange={this.onChange} />
-                </div>
+        if (this.props.value) {
+            return ( <div className = "top-side">
+                <h1> Enter your post </h1> <form onSubmit = {this.onSubmit} className = "ui form" >
 
-                <div className="upload-container">
-                    <label htmlFor="file">
-                        <i className="cloud upload massive icon"></i>
-                        <span>Choose a file</span>
-                        <span className="file-name">{this.state.fileName}</span>
-                        <span className="file-error">{this.state.fileError}</span>
-                        <input type="file" id="file" className="file-input" onChange={this.fileChangedHandler.bind(this)} />
-                    </label>
-                </div>
+                <div className = {this.state.classActive ? "ui long error input" : "ui long input"} >
+                <input type = "text" placeholder = "Your title" name = "title" onChange = {this.onChange}
+                value = {this.state.title}/> </div >
 
-              <button className="ui red long button" type='sumbmit'>Sumbmit</button>
-            </form>
-          </div>
-        );
+                <div className = {this.state.classActive ? "filed-form error" : "filed-form" } >
+                <textarea name = "body" rows = "6" placeholder = "Your description" value = { this.state.body } onChange = { this.onChange }/> 
+                </div >
+
+                <div className = "upload-container" >
+                <label htmlFor = "file" >
+                <i className = "cloud upload massive icon" > </i> 
+                <span > Choose a file </span>
+                <span className = "file-name" > {
+                    this.state.fileName
+                } </span>
+                <span className = "file-error" > {
+                    this.state.fileError
+                } </span> <input type = "file" id = "file" className = "file-input" onChange = { this.fileChangedHandler.bind(this) }/>
+                 </label>
+                 </div>
+                <button className = "ui red long button" type = 'sumbmit' > Sumbmit </button>
+                </form > 
+                </div>
+            );
+        } else {
+            return <div > </div>
+        }
     }
 }
 

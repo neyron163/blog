@@ -3,7 +3,8 @@ import {
     NEW_POST,
     EDIT_POST,
     DEL_POST,
-    POST_USER
+    POST_USER,
+    USER_EXIT
 } from './types';
 
 
@@ -18,18 +19,24 @@ export const fetchPosts = () => dispatch => {
 
 export const postUser = (user) => dispatch => {
     fetch('/postUser', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        // .then(resJson => console.log(resJson))
+        .then(response => dispatch({
+            type: POST_USER,
+            payload: response
+        }));
+}
+export const exitUser = () => dispatch => {
+    dispatch({
+        type: USER_EXIT,
+        payload: false
     })
-    .then(res => res.json())
-    // .then(resJson => console.log(resJson))
-    .then(response => dispatch({
-        type: POST_USER,
-        payload: response
-    }));
 }
 
 export const createPost = (formData) => dispatch => {

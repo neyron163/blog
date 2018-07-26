@@ -5,25 +5,25 @@
     transform: translate(-50%, -50%);
     z-index: 999;
     width: 600px;
-    height: 400px;
-    background: url(./bg.jpg);
+    height: 300px;
     background-size: cover; 
-    border-radius: 6px;
 }
 .enter .enter-container::after{
     content: '';
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     z-index: -1;
     height: 100%;
-    border-radius: 6px;
+    border-radius: 25px;
 }
 .enter .enter-close{
-    display: inline-block;
     cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 10px;
 }
 .enter .enter-close .close{
     transform: scale(0.8);
@@ -35,4 +35,25 @@
 .enter .enter-container form{
     max-width: 300px;
     margin: 0 auto;
+}
+.enter .enter-container .form-enter{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 75px;
+}
+.enter .enter-container .form-enter .input{
+    margin-bottom: 10px;
+}
+.enter .enter-container .form-enter button{
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .enter .enter-container{
+        width: 300px;
+    }
+    .enter .enter-container .form-enter {
+        max-width: 150px;
+    }
 }

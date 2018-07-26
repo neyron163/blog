@@ -29,7 +29,7 @@ class Header extends Component {
             <div className="flex-container">
                 <a href="/"><div className="nick-name">Welcome to blog</div></a>
                     <div>
-                        <Enter />
+                        <Enter value={this.props.value}/>
                         <button className="ui red long button" onClick={this.onClick}>Toggle on {this.state.name ? 'White' : 'Dark'} Theme</button>
                     </div>
             </div>

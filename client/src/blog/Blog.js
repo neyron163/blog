@@ -23,34 +23,19 @@ class Blog extends Component {
     }
     render() {
         store.subscribe(() => {
-            let te;
-            if(store.getState().enter.response){
-                te = true;
-            }
-            saveState(te)
-            // this.setState({ res: loadState() })
-            console.log(loadState())
+            this.setState({ res: loadState() })
           });
-        if(this.state.res){
+
             return (
                 <Provider store={store}>
                         <div className="content">
-                            <Header />
-                            <PostForm />
-                            <Posts getValueEdit={this.state.res} />
-                        </div>
-                </Provider>
-            );
-        }else{
-            return (
-                <Provider store={store}>
-                        <div className="content">
-                            <Header />
+                            <Header value={this.state.res}/>
+                            <PostForm value={this.state.res}/>
                             <Posts />
                         </div>
                 </Provider>
             );
-        }
+
     }
 }
 
