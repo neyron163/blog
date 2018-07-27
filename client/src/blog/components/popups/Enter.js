@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {postUser, exitUser} from '../../actions/postActions';
 import PropTypes from 'prop-types';
-import {saveState} from '../../localStorage';
 
 import './enter.css';
 class Enter extends Component {
@@ -27,8 +26,6 @@ class Enter extends Component {
     this.onClickExit = this.onClickExit.bind (this);
     this.onSubmit = this.onSubmit.bind (this);
     this.onChange = this.onChange.bind (this);
-
-    console.log (this.props.value);
   }
   onChange (e) {
     this.setState ({
@@ -52,9 +49,6 @@ class Enter extends Component {
 
     e.preventDefault ();
 
-    console.log ('true');
-    console.log ('login: ' + this.state.login);
-    console.log ('password: ' + this.state.password);
     const user = [
       {
         login: this.state.login,
@@ -63,10 +57,6 @@ class Enter extends Component {
     ];
 
     this.props.postUser (user);
-    console.log (this.props.value);
-    if (!this.props.value) {
-      document.body.classList.remove ('enter-popup-active');
-    }
   }
   onClickOpen () {
     this.setState ({
@@ -76,7 +66,6 @@ class Enter extends Component {
         transition: 'opacity 0.6s',
       },
     });
-    // document.body.classList.add('enter-popup-active');
   }
   onClickClose () {
     this.setState ({popup: false});
@@ -87,7 +76,23 @@ class Enter extends Component {
     localStorage.setItem ('response', false);
     this.props.exitUser ();
   }
+  removeBackground () {
+    document.body.classList.remove ('enter-popup-active');
+    return (
+      <button onClick={this.onClickExit} className="ui red long button">
+        Exit
+      </button>
+    );
+  }
   render () {
+    const removeBackground = () => {
+      document.body.classList.remove ('enter-popup-active');
+      return (
+        <button onClick={this.onClickExit} className="ui red long button">
+          Exit
+        </button>
+      );
+    };
     const openedPopup = state => {
       if (state) {
         document.body.classList.add ('enter-popup-active');
@@ -148,14 +153,9 @@ class Enter extends Component {
               >
                 Enter like Admin
               </button>
-              {' '}
               {openedPopup (this.state.popup)}
             </div>
-          : <button onClick={this.onClickExit} className="ui red long button">
-              Exit
-            </button>}
-        {/* <button onClick={this.onClickOpen} className="ui green long button">Enter like Admin</button> */}
-
+          : <div> {removeBackground ()} </div>}
       </div>
     );
   }

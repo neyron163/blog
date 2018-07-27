@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Route, Link} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {fetchPosts, editPost, deletePost} from '../actions/postActions';
 import {history} from '../store';
 import {ConnectedRouter} from 'react-router-redux';
-import {Button} from 'semantic-ui-react';
+import PostSingle from './PostSingle';
+import store from '../store';
+import {loadState} from '../localStorage';
 
 import Edit from './edit/Edit';
 import Social from './social/Social';
@@ -19,6 +21,7 @@ class Posts extends Component {
       editID: '',
       title: '',
       body: '',
+      res: false,
     };
 
     this.onSubmitDelete = this.onSubmitDelete.bind (this);
@@ -41,46 +44,10 @@ class Posts extends Component {
     e.preventDefault ();
     this.props.deletePost (post._id);
   }
-  postSend (post, check) {
-    if (post._id === this.state.editID) {
-      if (check === 'title') {
-        return post.title;
-      }
-      if (check === 'body') {
-        return post.body;
-      }
-    }
-  }
-  image (img) {
-    if (img) {
-      return <img src={'/images/' + img} aria-hidden alt="image" />;
-    }
-  }
-  singlePost (sPost) {
-    return this.props.posts.map ((post, i) => {
-      if (post._id === sPost) {
-        return (
-          <div key={post._id + i} className="single-post">
-            <h1>{post.title}</h1>
-            <div className="p-inner">{post.body}</div>
-            {this.image (post.image)}
-            <Button
-              color="red"
-              content="Like"
-              icon="heart"
-              label={{
-                basic: true,
-                color: 'red',
-                pointing: 'left',
-                content: '2,048',
-              }}
-            />
-          </div>
-        );
-      }
-    });
-  }
   render () {
+    store.subscribe (() => {
+      this.setState ({res: loadState ('response')});
+    });
     const postItems = () =>
       this.props.posts.map ((post, i) => {
         return (
@@ -95,50 +62,50 @@ class Posts extends Component {
                 check={post._id === this.state.editID}
               />
             </div>
+            {this.state.res
+              ? <div className="more-container">
+                  <div className="info">
+                    <i className="ellipsis vertical icon large icon-red" />
+                    <div className="popup-container">
+                      <div className="wrapper">
 
-            <div className="more-container">
-              <div className="info">
-                <i className="ellipsis vertical icon large icon-red" />
-                <div className="popup-container">
-                  <div className="wrapper">
+                        <button
+                          type="sumbmit"
+                          className="edites"
+                          onClick={() => this.onClickEdit (post)}
+                        >
+                          <div className="remove">
+                            <i aria-hidden="true" className="edit icon" />
+                          </div>
+                          <div className="mobile-hide">Edit Post</div>
+                        </button>
 
-                    <button
-                      type="sumbmit"
-                      className="edites"
-                      onClick={() => this.onClickEdit (post)}
-                    >
-                      <div className="remove">
-                        <i aria-hidden="true" className="edit icon" />
+                        <form onSubmit={e => this.onSubmitDelete (e, post)}>
+                          <button type="sumbmit" className="delete">
+                            <div className="remove">
+                              <i aria-hidden="true" className="close icon" />
+                            </div>
+                            <div className="mobile-hide">Delete Post</div>
+                          </button>
+                        </form>
+
                       </div>
-                      <div className="mobile-hide">Edit Post</div>
-                    </button>
-
-                    <form onSubmit={e => this.onSubmitDelete (e, post)}>
-                      <button type="sumbmit" className="delete">
-                        <div className="remove">
-                          <i aria-hidden="true" className="close icon" />
-                        </div>
-                        <div className="mobile-hide">Delete Post</div>
-                      </button>
-                    </form>
-
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              : null}
+
           </div>
         );
       });
-    const Child = ({match}) => (
-      <div>
-        {this.singlePost (match.params.id, match, postItems)}
-      </div>
+    const SingleChild = ({match}) => (
+      <PostSingle postID={match.params.id} posts={this.props.posts} />
     );
     return (
       <ConnectedRouter history={history}>
         <div className="posts">
           <Route exact path="/" component={postItems} />
-          <Route exact path="/:id" component={Child} />
+          <Route exact path="/:id" component={SingleChild} />
           <Social />
         </div>
       </ConnectedRouter>

@@ -8,7 +8,8 @@ const Article = new Schema({
     title: String,
     body: String,
     image: String,
-    popupEditor: Boolean
+    popupEditor: Boolean,
+    likes: Number
 });
 
 
