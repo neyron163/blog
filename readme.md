@@ -3,7 +3,7 @@
 ### backend => (nodejs => express) && (mongodb => mongoose)
 
 ### How to install mongodb
-* [mongodb](https://docs.mongodb.com/manual/administration/install-on-linux/) - HTML enhanced for web apps!
+* [mongodb](https://docs.mongodb.com/manual/administration/install-on-linux/)
 
 ### How to install project
 ```sh
