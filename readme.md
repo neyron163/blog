@@ -16,5 +16,5 @@ $ npm install && npm start
 ![alt text](https://github.com/neyron163/blog/blob/master/blog.png)
 ### Admin
 ![alt text](https://github.com/neyron163/blog/blob/master/blogedit.png)
-### Popup enter
-![alt text](https://github.com/neyron163/blog/blob/master/panel.png)
+<!-- ### Popup enter
+![alt text](https://github.com/neyron163/blog/blob/master/panel.png) -->
