@@ -51,12 +51,12 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/posts', posts);
-app.use('/postsForm', postForm);
-app.use('/postsEdit', postEdit);
-app.use('/postsDel', postDel);
-app.use('/postUser', postUser);
-app.use('/', singelPost);
+app.use('/api/posts', posts);
+app.use('/api/postsForm', postForm);
+app.use('/api/postsEdit', postEdit);
+app.use('/api/postsDel', postDel);
+app.use('/api/postUser', postUser);
+app.use('/api/', singelPost);
 
 
 // catch 404 and forward to error handler

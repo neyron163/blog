@@ -6,8 +6,6 @@ import {fetchPosts, editPost, deletePost} from '../actions/postActions';
 import {history} from '../store';
 import {ConnectedRouter} from 'react-router-redux';
 import PostSingle from './PostSingle';
-import store from '../store';
-import {loadState} from '../localStorage';
 
 import Edit from './edit/Edit';
 import Social from './social/Social';
@@ -21,7 +19,6 @@ class Posts extends Component {
       editID: '',
       title: '',
       body: '',
-      res: false,
     };
 
     this.onSubmitDelete = this.onSubmitDelete.bind (this);
@@ -45,9 +42,6 @@ class Posts extends Component {
     this.props.deletePost (post._id);
   }
   render () {
-    store.subscribe (() => {
-      this.setState ({res: loadState ('response')});
-    });
     const postItems = () =>
       this.props.posts.map ((post, i) => {
         return (
@@ -62,8 +56,7 @@ class Posts extends Component {
                 check={post._id === this.state.editID}
               />
             </div>
-            {this.state.res
-              ? <div className="more-container">
+               <div className="more-container">
                   <div className="info">
                     <i className="ellipsis vertical icon large icon-red" />
                     <div className="popup-container">
@@ -93,7 +86,6 @@ class Posts extends Component {
                     </div>
                   </div>
                 </div>
-              : null}
 
           </div>
         );

@@ -86,7 +86,6 @@ class Postform extends Component {
     }
   }
   render () {
-    if (this.props.value) {
       return (
         <div className="top-side">
           <h1> Enter your post </h1> <form
@@ -142,8 +141,6 @@ class Postform extends Component {
           </form>
         </div>
       );
-    }
-    return null;
   }
 }
 

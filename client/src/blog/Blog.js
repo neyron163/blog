@@ -12,20 +12,15 @@ import {loadState} from './localStorage';
 class Blog extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      res: false,
-    };
   }
   render () {
-    store.subscribe (() => {
-      this.setState ({res: loadState ('response')});
-    });
+
 
     return (
       <Provider store={store}>
         <div className="content">
-          <Header value={this.state.res} />
-          <PostForm value={this.state.res} />
+          <Header />
+          <PostForm />
           <Posts />
         </div>
       </Provider>
